@@ -12,6 +12,7 @@ namespace SampleWeb.Models
         public string sortedString;
         public string getSentence { get; set; }
 
+     
         public void runTestString()
         {
             originalString = "this is a tester string";

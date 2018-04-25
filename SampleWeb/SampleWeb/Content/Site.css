@@ -22,3 +22,24 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.ExampleBox {
+    padding:5%;
+    background-color: #6B5B95;
+    margin-bottom:10px;
+}
+
+.headerTitle {
+    font-family: "UniqueFont", Georgia, serif;
+    padding: 2%;
+    margin-top: 0;
+    display: inline-block;
+    background-color: #F0EDE5;
+}
+
+.TryItBox {
+    padding: 5%;
+    background-color: #4F84C4;
+}
+
+

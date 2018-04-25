@@ -2,7 +2,21 @@
 @{
     ViewBag.Title = "SortView";
 }
+@Styles.Render("~/Content/css")
 
-<h2>SortView</h2>
-<h4> THe original sentence -> @Model.originalString</h4>
-<h4> THe Sorted sentence -> @Model.sortedString</h4>
+<div class="page-header">
+    <h2>SortView</h2>
+    <p class="text-info"> This page is intended to sort string sentences </p>
+</div>
+<div class="ExampleBox">
+    <h3 class="headerTitle"> Example of String sort</h3>
+    <div>
+        <h4 class="headerTitle"> Original: @Model.originalString</h4>
+        <h4 class="headerTitle"> Sorted: @Model.sortedString</h4>
+    </div>   
+</div>
+
+<div class="TryItBox">
+    <h3 class="headerTitle"> Try it Yourself! </h3>
+    @Html.TextBoxFor(m => m.getSentence, new { @class = "form-control" })
+</div>
