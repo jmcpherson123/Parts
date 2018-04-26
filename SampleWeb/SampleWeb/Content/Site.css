@@ -40,8 +40,12 @@ textarea {
 .TryItBox {
     padding: 5%;
     background-color: #4F84C4;
+    
 }
-
+.displayBox {
+    padding: 5%;
+    background-color: #4F84C4;
+}
 .form-control{
     max-width:100%;
 }

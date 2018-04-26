@@ -1,22 +1,40 @@
 ﻿@model SortViewModel
-@{
-    ViewBag.Title = "SortView";
-}
+
 @Styles.Render("~/Content/css")
 
-<div class="page-header">
-    <h2>SortView</h2>
-    <p class="text-info"> This page is intended to sort string sentences </p>
-</div>
-<div class="ExampleBox">
-    <h3 class="headerTitle"> Example of String sort</h3>
-    <div>
-        <h4 class="headerTitle"> Original: @Model.originalString</h4>
-        <h4 class="headerTitle"> Sorted: @Model.sortedString</h4>
-    </div>   
-</div>
 
-<div class="TryItBox">
-    <h3 class="headerTitle"> Try it Yourself! </h3>
-    @Html.TextBoxFor(m => m.getSentence, new { @class = "form-control" })
-</div>
+@using (Html.BeginForm("Sort", "Sort", FormMethod.Post, new { SortViewModel =Model }))
+{
+    <div class="page-header">
+        <h2 class="headerTitle">Sort String</h2>
+        <p class="text-info"> This page is intended to sort string sentences </p>
+    </div>
+    <div class="ExampleBox">
+        <h3 class="headerTitle"> Example of String sort</h3>
+        <div>
+            <h4 class="headerTitle"> Original: @Model.originalString</h4>
+            <h4 class="headerTitle"> Sorted: @Model.exampleString</h4>
+        </div>
+    </div>
+   
+    <div class="TryItBox">
+        <h3 class="headerTitle"> Try it Yourself! </h3>
+        @Html.TextBoxFor(m => m.getSentence, new { @class = "form-control" })
+        <button class="btn btn-success" type="submit"> Sort </button>
+    </div>
+    <div class="displayBox">
+        @if (!Model.sortedString.Equals(""))
+        {
+           <h4 class="headerTitle">@Model.sortedString</h4>
+        }
+    </div>
+
+}
+
+<script>
+    $(document).ready(function (){
+        
+    })
+    var tester = @Html.Raw(Model.exampleString);
+
+</script>

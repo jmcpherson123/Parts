@@ -10,19 +10,21 @@ namespace SampleWeb.Models
     {
         public string originalString;
         public string sortedString;
+        public string exampleString;
         public string getSentence { get; set; }
 
      
         public void runTestString()
         {
             originalString = "this is a tester string";
-            StringSorter sorter = new StringSorter(originalString);
-            sortedString=sorter.sortedString;
-            
+            exampleString = SortString(originalString);  
         }
-        public string getString()
+
+        public string SortString(string sentence)
         {
-            return sortedString;
+            StringSorter sorter = new StringSorter(sentence);
+            string temporaryString = sorter.sortedString;
+            return temporaryString;
         }
     }
 }

@@ -13,7 +13,15 @@ namespace SampleWeb.Controllers
         public ActionResult Sort()
         {
             SortViewModel vm = new SortViewModel();
+            vm.sortedString = "";
             vm.runTestString();
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult Sort(SortViewModel vm)
+        {
+            vm.sortedString=vm.SortString(vm.getSentence);
             return View(vm);
         }
     }
