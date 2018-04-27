@@ -23,6 +23,12 @@ textarea {
     max-width: 280px;
 }
 
+.labelBox {
+    padding: 5%;
+    text-align:center;
+    margin-bottom: 10px;
+}
+
 .ExampleBox {
     padding:5%;
     background-color: #6B5B95;
@@ -35,6 +41,10 @@ textarea {
     margin-top: 0;
     display: inline-block;
     background-color: #F0EDE5;
+}
+
+.instruction {
+    font-family: "UniqueFont", Georgia, serif;
 }
 
 .TryItBox {

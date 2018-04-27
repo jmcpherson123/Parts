@@ -3,38 +3,54 @@
 @Styles.Render("~/Content/css")
 
 
-@using (Html.BeginForm("Sort", "Sort", FormMethod.Post, new { SortViewModel =Model }))
+@using (Html.BeginForm("Sort", "Sort", FormMethod.Post, new { SortViewModel = Model }))
 {
-    <div class="page-header">
-        <h2 class="headerTitle">Sort String</h2>
-        <p class="text-info"> This page is intended to sort string sentences </p>
+    <div class="labelBox">
+        <h3 class="instruction"> Select what type of sort you would like to do</h3>
+        <button class="btn" type="button" id="sortByID"> Sort String</button>
+        <button class="btn btn-primary"> Sort String</button>
+        <button class="btn btn-primary"> Sort String</button>
     </div>
-    <div class="ExampleBox">
-        <h3 class="headerTitle"> Example of String sort</h3>
-        <div>
-            <h4 class="headerTitle"> Original: @Model.originalString</h4>
-            <h4 class="headerTitle"> Sorted: @Model.exampleString</h4>
+
+    <div class="sortStringContainer">
+        <div class="page-header">
+            <h2 class="headerTitle">Sort String</h2>
+            <p class="text-info"> This page is intended to sort string sentences </p>
+        </div>
+        <div class="ExampleBox">
+            <h3 class="headerTitle"> Example of String sort</h3>
+            <div>
+                <h4 class="headerTitle"> Original: @Model.originalString</h4>
+                <h4 class="headerTitle"> Sorted: @Model.exampleString</h4>
+            </div>
+        </div>
+
+        <div class="TryItBox">
+            <h3 class="headerTitle"> Try it Yourself! </h3>
+            @Html.TextBoxFor(m => m.getSentence, new { @class = "form-control" })
+            <button class="btn btn-success" type="submit"> Sort </button>
+        </div>
+        <div class="displayBox">
+            @if (!Model.sortedString.Equals(""))
+            {
+                <h4 class="headerTitle">@Model.sortedString</h4>
+            }
         </div>
     </div>
-   
-    <div class="TryItBox">
-        <h3 class="headerTitle"> Try it Yourself! </h3>
-        @Html.TextBoxFor(m => m.getSentence, new { @class = "form-control" })
-        <button class="btn btn-success" type="submit"> Sort </button>
-    </div>
-    <div class="displayBox">
-        @if (!Model.sortedString.Equals(""))
-        {
-           <h4 class="headerTitle">@Model.sortedString</h4>
-        }
-    </div>
+
 
 }
+@Scripts.Render("~/bundles/jquery")
 
 <script>
-    $(document).ready(function (){
-        
+    $(document).ready(function () {
+        $("#sortById").click(function () {
+            if (this.checked) {
+                $(".sortStringContainer").show();
+            }
+            if (!this.checked) {
+                $(".sortStringContainer").hide();
+            }
+        })
     })
-    var tester = @Html.Raw(Model.exampleString);
-
 </script>
