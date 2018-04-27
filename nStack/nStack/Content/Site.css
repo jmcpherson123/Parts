@@ -1,0 +1,149 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    height: 100%;
+}
+
+.buttonT {
+    padding: 20px 32px;
+    text-align: center;
+    display: inline-block;
+    color: #28588a;
+    font-size: 16px;
+    background-color: #4390df; 
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width:350px;
+}
+
+    .buttonT:hover {
+        background-color: #28588a; 
+        color: white;
+    }
+
+.table_container {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    height: 100%;
+    margin-left:15%;
+    vertical-align: middle;
+
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-top: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.ContainerStack {
+    padding-left: 20px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists
+   will truncate terms that are too long to fit in the left column
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+.container {
+    background-color: #4390df;
+    max-width: none;
+    position: relative;
+}
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.box {
+    height: 22px;
+    width: 22px;
+    background-color: #eee;
+    vertical-align: middle;
+}
+
+b {
+    padding: 5px;
+}
+
+.userContainer {
+    margin:25px;
+}
+.userId {
+    position: fixed;
+    top: 500px;
+    width: 150px;
+    height: 150px;
+    border: none;
+}
+
+.navbar-inverse, a {
+    background-color: #4390df;
+    border-color: #ffffff;
+    height: 28px;
+    color: #28588a;
+    font-size: 29px;
+    font-family: MalgunGothicBold, Malgun Gothic;
+}
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: #28588a;
+    }
+
+.navbar-brand {
+    padding: 0cm;
+}
+
+body {
+    background: url("bkGround.png");
+    background-size: 100%;
+    background-repeat:repeat;
+}
+
+.pContent, .tester {
+    padding-bottom: 20%;
+    padding-left: 10%;
+    padding-right: 15%;
+}
+
+tr, .SectionTableTitle {
+    border-bottom: none;
+}
+
+td {
+    vertical-align: middle;
+    padding: 15px;
+    margin: 2px;
+    border: none;
+    display: inline-block;
+    background-color: #e3f2fd;
+}
+
+.checkInput {
+    padding: 15px;
+    background-color: #e3f2fd;
+}
+
+th {
+    color: #3795c6;
+    font-size: 15px;
+    margin-left: 10%;
+    border-bottom: outset;
+    font-weight: bold;
+    border-color: black;
+}
+
+table {
+    width: 100%;
+}
+
+hr {
+    border-top: none;
+}

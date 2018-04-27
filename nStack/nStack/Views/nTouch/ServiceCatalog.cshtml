@@ -1,0 +1,65 @@
+﻿@model nTouchViewModel
+@{
+
+    ViewBag.Title = "Service Catalog";
+}
+<head>
+    @Styles.Render("~/Content/Site.css")
+</head>
+@using (Html.BeginForm("ServiceCatalog", "nTouch", FormMethod.Post, new { nTouchViewModel = Model }))
+{
+    <body>
+        <div class="body-content">
+            Verify the information matches that for the user you with to create
+
+            @if (Model.ListOfRequestItems.Count != 0)
+            {
+                @Html.HiddenFor(model => model.sc_item_option, new { id = "sec" })
+                foreach (var Item in Model.ListOfRequestItems)
+                {
+                    <h4> Sys Id for Request @Item.Sys_Id</h4>
+                    @Html.HiddenFor(model => model.ListOfRequestItems.ElementAt(0).sys_created_by, new { id = "tester2" })
+                    <h4>Requested By: @Item.sys_created_by</h4>
+                    <h4>Requested Number: @Item.RequestNumber</h4>
+                    <h4>Upon Approval: @Item.upon_approval</h4>
+                    <h4>Description of Action: @Item.Description</h4>
+                    <h4>Approval Status: @Item.approval</h4>
+                    <h4>System class Name: @Item.sys_class_name</h4>
+                    <h4>Requested : @Item.request</h4>
+                    <button class="btn btn-primary" id=Element1 type="button"> Create User</button>
+                }
+            }
+            @if (Model.RequestVariable.Variables.Count != 0)
+            {
+                foreach (var param in Model.RequestVariable.Variables)
+                {
+                    <h4>@param.Key : @param.Value</h4>
+                }
+            }
+           
+            <br /><input type="submit" value="Get Categories" class="btn btn-primary" />
+        </div>
+    </body>
+}
+
+@Scripts.Render("~/bundles/jquery")
+<script>
+    function get_sc_item_option() {
+        var requestBody = "";
+
+        var client = new XMLHttpRequest();
+        client.open("get", "https://nfrastructuredev.service-now.com/api/now/table/sc_item_option?sysparm_query=active%3Dtrue%5EORDERBYDESCsys_created_on&sysparm_display_value=true&sysparm_exclude_reference_link=true&sys_created_by=" + $("#tester2").val());
+        client.setRequestHeader("Accept", "application/json");
+        client.setRequestHeader('Content-Type', 'application/json');
+        client.setRequestHeader("Authorization", "Basic " + btoa("Jasmin.McPherson" + ":" + "Kai1tu2re3!"));
+
+        client.onreadystatechange = function () {
+            if (this.readyState == this.DONE) {
+                var test = this.response;
+                $("#sec").val(test);
+            }
+        };
+        client.send(requestBody);
+    }
+    get_sc_item_option();
+</script>

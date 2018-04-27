@@ -1,0 +1,158 @@
+﻿@model nTouchViewModel
+@{
+
+    ViewBag.Title = "nTouch";
+}
+
+@using (Html.BeginForm("nTouch", "nTouch", FormMethod.Post, new { nTouchViewModel = Model, id = "nTouch" }))
+{
+    int i = 0;
+    <body>
+        <div class="body-content">
+            Tester page to test connection using JS to Service now, My independent instance(Jakarta) Sample
+
+            @Html.HiddenFor(model => model.sc_task, new { id = "sc_task" })
+            <button class="btn btn-primary" id=sId type="button"> Get Tasks</button>
+            @Html.HiddenFor(model => model.sc_item_option_otom, new { id = "sec" })
+
+            @Html.HiddenFor(model => model.sc_req_item, new { id = "sc_req" })
+
+            @if (Model.ListOfRequestItems.Count != 0)
+            {
+                foreach (var Item in Model.ListOfRequestItems)
+                {
+                    <div class="userContainer">
+                        <img src="~/Content/if_account_friend_human_man_member_person_profile_user_users_392531.png" />
+                        <button class="btn btn-primary" id=@Item.RequestNumber type="button"> Create User</button>
+                        @Html.HiddenFor(model => model.request_variable, new { id = "req_var" })
+                        <h4>Request Name @Item.Description</h4>
+                        <h4> Sys Id for Request @Item.Sys_Id</h4>
+                        <h4>Requested By: @Item.sys_created_by</h4>
+                        <h4>Requested Number: @Item.RequestNumber</h4>
+                        <h4>Upon Approval: @Item.upon_approval</h4>
+                        <h4>Short Description: @Item.short_description</h4>
+                        <h4>Approval Status: @Item.approval</h4>
+                        <h4>Expected Start Date: @Item.expected_start</h4>
+                        <h4>Task Number : @Item.TaskNumber</h4>
+                    </div>
+                }
+            }
+      
+
+            @foreach(var tester in Model.ListOfRequestItems)
+            {
+                    <h5>@tester.sys_Ids_Values.ToString()</h5>
+            }
+           
+        </div>
+    </body>
+}
+
+@Scripts.Render("~/bundles/jquery")
+<script>
+    function get_sc_task() {
+        var requestBody = "";
+
+        var client = new XMLHttpRequest();
+        var clientOptions = new XMLHttpRequest();
+        client.open("get", "https://nfrastructuredev.service-now.com/api/now/table/sc_task?sysparm_query=active%3Dtrue%5EORDERBYDESCsys_created_on&sysparm_display_value=true&sysparm_exclude_reference_link=true&sysparm_limit=60");
+        client.setRequestHeader("Accept", "application/json");
+        client.setRequestHeader('Content-Type', 'application/json');
+
+        //Eg. UserName="admin", Password="admin" for this code sample.
+        client.setRequestHeader("Authorization", "Basic " + btoa("Jasmin.McPherson" + ":" + "Kai1tu2re3!"));
+        //client.open("get","https://nfrastructuredev.service-now.com/api/now/table/sc_req_item?sysparm_query=active%3Dtrue%5EORDERBYDESCsys_created_on&sysparm_display_value=true&sysparm_exclude_reference_link=true&sysparm_limit=10");
+
+        client.onreadystatechange = function () {
+            if (this.readyState == this.DONE) {
+                var object1 = this.response;
+                $("#sc_task").val(object1);
+
+            }
+
+        };
+        client.send(requestBody);
+
+    }
+    function get_sc_req_item() {
+        var requestBody = "";
+
+        var client = new XMLHttpRequest();
+        var clientOptions = new XMLHttpRequest();
+        client.open("get", "https://nfrastructuredev.service-now.com/api/now/table/sc_req_item?sysparm_query=active%3Dtrue%5EORDERBYDESCsys_created_on&sysparm_display_value=true&sysparm_exclude_reference_link=true&sysparm_limit=60");
+        client.setRequestHeader("Accept", "application/json");
+        client.setRequestHeader('Content-Type', 'application/json');
+
+        //Eg. UserName="admin", Password="admin" for this code sample.
+        client.setRequestHeader("Authorization", "Basic " + btoa("Jasmin.McPherson" + ":" + "Kai1tu2re3!"));
+        //client.open("get","https://nfrastructuredev.service-now.com/api/now/table/sc_req_item?sysparm_query=active%3Dtrue%5EORDERBYDESCsys_created_on&sysparm_display_value=true&sysparm_exclude_reference_link=true&sysparm_limit=10");
+
+        client.onreadystatechange = function () {
+            if (this.readyState == this.DONE) {
+                var object1 = this.response;
+                $("#sc_req").val(object1);
+            }
+        };
+        client.send(requestBody);
+
+    }
+    function get_sc_item_option_otom() {
+        var requestBody = "";
+
+        var client = new XMLHttpRequest();
+        client.open("get", "https://nfrastructuredev.service-now.com/api/now/table/sc_item_option_mtom?sysparm_query=active%3Dtrue%5EORDERBYDESCsys_created_on&sysparm_display_value=true&sysparm_exclude_reference_link=true&sysparm_limit=60");
+        client.setRequestHeader("Accept", "application/json");
+        client.setRequestHeader('Content-Type', 'application/json');
+        client.setRequestHeader("Authorization", "Basic " + btoa("Jasmin.McPherson" + ":" + "Kai1tu2re3!"));
+
+        client.onreadystatechange = function () {
+            if (this.readyState == this.DONE) {
+                var test = this.response;
+                $("#sec").val(test);
+
+            }
+        };
+        client.send(requestBody);
+    }
+    function get_specificUser(Refnum) {
+        var requestBody = "";
+
+        var client = new XMLHttpRequest();
+        var clientOptions = new XMLHttpRequest();
+        client.open("get", "https://nfrastructuredev.service-now.com/api/now/table/sc_item_option?sysparm_query=active%3Dtrue%5EORDERBYDESCsys_created_on&sysparm_display_value=true&sysparm_exclude_reference_link=true&sysparm_fields=item_option_new%2Cvalue&sysparm_limit=60&request_item=" + Refnum);
+        client.setRequestHeader("Accept", "application/json");
+        client.setRequestHeader('Content-Type', 'application/json');
+
+        //Eg. UserName="admin", Password="admin" for this code sample.
+        client.setRequestHeader("Authorization", "Basic " + btoa("Jasmin.McPherson" + ":" + "Kai1tu2re3!"));
+
+        client.onreadystatechange = function () {
+            if (this.readyState == this.DONE) {
+                var object1 = this.response;
+
+            }
+
+        };
+        client.send(requestBody);
+
+    }
+    $(document).ready(function () {
+        $(window).on("load", function () {
+            get_sc_req_item();
+            get_sc_task();
+            get_sc_item_option_otom();
+            $("#sId").click(function () {
+                document.getElementById("nTouch").submit();
+            })
+
+            $("button").click(function () {
+
+                var refNum = this.id.toString();
+                $("#req_var").val(refNum);
+                alert($("#req_var").val());
+                document.getElementById("nTouch").submit();
+
+            })
+        });
+    })
+</script>
