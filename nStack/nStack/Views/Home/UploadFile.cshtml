@@ -1,0 +1,33 @@
+﻿@model UploadViewModel
+@{
+    ViewBag.Title = "Upload";
+}
+<h2>Upload</h2>
+<div>
+    <p>@Html.DisplayFor(m => m.section)</p>
+    <h3>Your file has been successfully uploaded</h3>
+
+    @foreach (var title in Model.ReadData.container)
+    {
+        <table class="table">
+            <thead>
+                <h2>@title.Key</h2>
+            </thead>
+            <tbody>
+                @foreach (var value in title.Value)
+                {
+                <tr>
+                    <th>
+                        @value.Key
+                    </th>
+                    @foreach (var sect in value.Value)
+                        {
+                    <td>@sect</td>
+                          
+                        }
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
