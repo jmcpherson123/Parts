@@ -35,7 +35,7 @@
                     @for (int iterator = 0; iterator < Model.AdminCheckBoxes.Count; iterator++)
                     {
                         @Html.HiddenFor(model => model.AdminCheckBoxes[iterator].Name, new { id = Model.AdminCheckBoxes[iterator].Name })
-                        if (Model.AcctAdminTest.Contains(Model.AdminCheckBoxes[iterator].Name))
+                        if (Model.AcctAdminUsedBy.Contains(Model.AdminCheckBoxes[iterator].Name))
                         {
                             <td><b>@Model.AdminCheckBoxes[iterator].Name</b>@Html.CheckBoxFor(model => model.AdminCheckBoxes[iterator].Checked, new { @class = "box" })</td>
                         }
@@ -49,7 +49,7 @@
                     {
                         string SDid = "shareDrive" + Model.ShareDriveCheckBoxes[iterator].Name;
                         @Html.HiddenFor(model => model.ShareDriveCheckBoxes[iterator].Name, new { id = SDid })
-                        if (Model.ShareDriveTest.Contains(Model.ShareDriveCheckBoxes[iterator].Name))
+                        if (Model.ShareDriveUsedBy.Contains(Model.ShareDriveCheckBoxes[iterator].Name))
                         {
                             <td><b>@Model.ShareDriveCheckBoxes[iterator].Name</b>@Html.CheckBoxFor(model => model.ShareDriveCheckBoxes[iterator].Checked, new { @class = "box" })</td>
                         }
@@ -63,7 +63,7 @@
                     {
                         string SDid = "PhoneSupport" + Model.PhoneSupportCheckboxes[iterator].Name;
                         @Html.HiddenFor(model => model.PhoneSupportCheckboxes[iterator].Name, new { id = SDid })
-                        if (Model.PhoneSupportTest.Contains(Model.PhoneSupportCheckboxes[iterator].Name))
+                        if (Model.PhoneSupportUsedBy.Contains(Model.PhoneSupportCheckboxes[iterator].Name))
                         {
                             <td><b>@Model.PhoneSupportCheckboxes[iterator].Name</b>@Html.CheckBoxFor(model => model.PhoneSupportCheckboxes[iterator].Checked, new { @class = "box" })</td>
                         }
@@ -77,7 +77,7 @@
                     {
                         string SDid = "SoftwareProv" + Model.SoftwareProvisionCheckboxes[iterator].Name;
                         @Html.HiddenFor(model => model.SoftwareProvisionCheckboxes[iterator].Name, new { id = SDid })
-                        if (Model.SoftwareProvisionTest.Contains(Model.SoftwareProvisionCheckboxes[iterator].Name))
+                        if (Model.SoftwareProvisionUsedBy.Contains(Model.SoftwareProvisionCheckboxes[iterator].Name))
                         {
                             <td><b>@Model.SoftwareProvisionCheckboxes[iterator].Name</b>@Html.CheckBoxFor(model => model.SoftwareProvisionCheckboxes[iterator].Checked, new { @class = "box" })</td>
                         }
@@ -91,7 +91,7 @@
                     {
                         string SDid = "PrinterAdmin" + Model.PrinterAdminCheckboxes[iterator].Name;
                         @Html.HiddenFor(model => model.PrinterAdminCheckboxes[iterator].Name, new { id = SDid })
-                        if (Model.PrinterAdminTest.Contains(Model.PrinterAdminCheckboxes[iterator].Name))
+                        if (Model.PrinterAdminUsedBy.Contains(Model.PrinterAdminCheckboxes[iterator].Name))
                         {
                             <td><b>@Model.PrinterAdminCheckboxes[iterator].Name</b>@Html.CheckBoxFor(model => model.PrinterAdminCheckboxes[iterator].Checked, new { @class = "box" })</td>
                         }
@@ -105,7 +105,7 @@
                     {
                         string SDid = "PCSupport" + Model.PCSupportCheckboxes[iterator].Name;
                         @Html.HiddenFor(model => model.PCSupportCheckboxes[iterator].Name, new { id = SDid })
-                        if (Model.PcSuppTest.Contains(Model.PCSupportCheckboxes[iterator].Name))
+                        if (Model.PcSupportUsedBy.Contains(Model.PCSupportCheckboxes[iterator].Name))
                         {
                             <td><b>@Model.PCSupportCheckboxes[iterator].Name</b>@Html.CheckBoxFor(model => model.PCSupportCheckboxes[iterator].Checked, new { @class = "box" })</td>
                         }
@@ -119,7 +119,7 @@
                     {
                         string SDid = "Office365" + Model.Office365Checkboxes[iterator].Name;
                         @Html.HiddenFor(model => model.Office365Checkboxes[iterator].Name, new { id = SDid })
-                        if (Model.Office365Test.Contains(Model.Office365Checkboxes[iterator].Name))
+                        if (Model.Office365UsedBy.Contains(Model.Office365Checkboxes[iterator].Name))
                         {
                             <td><b>@Model.Office365Checkboxes[iterator].Name</b>@Html.CheckBoxFor(model => model.Office365Checkboxes[iterator].Checked, new { @class = "box" })</td>
                         }
@@ -133,7 +133,7 @@
                     {
                         string SDid = "MicrosoftOffice" + Model.MicrosoftCheckboxes[iterator].Name;
                         @Html.HiddenFor(model => model.MicrosoftCheckboxes[iterator].Name, new { id = SDid })
-                        if (Model.MicroTest.Contains(Model.MicrosoftCheckboxes[iterator].Name))
+                        if (Model.MicrosoftUsedBy.Contains(Model.MicrosoftCheckboxes[iterator].Name))
                         {
                             <td><b>@Model.MicrosoftCheckboxes[iterator].Name</b>@Html.CheckBoxFor(model => model.MicrosoftCheckboxes[iterator].Checked, new { @class = "box" })</td>
                         }
@@ -147,7 +147,7 @@
                     {
                         string SDid = "Monitoring" + Model.MonitoringCheckboxes[iterator].Name;
                         @Html.HiddenFor(model => model.MonitoringCheckboxes[iterator].Name, new { id = SDid })
-                        if (Model.MonitoringTest.Contains(Model.MonitoringCheckboxes[iterator].Name))
+                        if (Model.MonitoringUsedBy.Contains(Model.MonitoringCheckboxes[iterator].Name))
                         {
                             <td><b>@Model.MonitoringCheckboxes[iterator].Name</b>@Html.CheckBoxFor(model => model.MonitoringCheckboxes[iterator].Checked, new { @class = "box" })</td>
                         }
