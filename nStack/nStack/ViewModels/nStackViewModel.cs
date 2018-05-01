@@ -15,15 +15,15 @@ namespace nStack.Models
         public List<string> SheetList;
         public List<SortedData[]> SortedData;
         //Section Checkbox select
-        public List<string> AcctAdminUsedBy = new List<string>();
-        public List<string> PcSupportUsedBy = new List<string>();
-        public List<string> MicrosoftOfficeUsedBy = new List<string>();
-        public List<string> Office365UsedBy = new List<string>();
-        public List<string> PhoneSupportUsedBy = new List<string>();
-        public List<string> SoftwareProvisionUsedBy = new List<string>();
-        public List<string> ShareDriveUsedBy = new List<string>();
-        public List<string> PrinterAdminUsedBy = new List<string>();
-        public List<string> MonitoringUsedBy = new List<string>();
+        public List<string> AcctAdminTest = new List<string>();
+        public List<string> PcSuppTest = new List<string>();
+        public List<string> MicroTest = new List<string>();
+        public List<string> Office365Test = new List<string>();
+        public List<string> PhoneSupportTest = new List<string>();
+        public List<string> SoftwareProvisionTest = new List<string>();
+        public List<string> ShareDriveTest = new List<string>();
+        public List<string> PrinterAdminTest = new List<string>();
+        public List<string> MonitoringTest = new List<string>();
 
         //Sheet selected Company Checkbox 
         public List<CheckboxHelper>AdminCheckBoxes { get; set; }

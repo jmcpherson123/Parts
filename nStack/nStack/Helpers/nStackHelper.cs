@@ -12,21 +12,20 @@ namespace nStack.Helpers
        //nStack Helper set up viewModel with Checkboxes and options. Get the selected checkbox 
         public static nStackViewModel setUpnStackWithoutSelection()
         {
-            //this is just a comment
             Analyzer analyze = new Analyzer();
             FileReader fileReader = new FileReader();
             nStackViewModel vm = new nStackViewModel();
             vm.MasterFile = fileReader.getMasterFile();
             vm.SortedData = analyze.SortBySection(vm.MasterFile);
-            vm.AcctAdminUsedBy = analyze.CompanySectionsUsed.AcctAdmin;
-            vm.PcSupportUsedBy = analyze.CompanySectionsUsed.PCSupport;
-            vm.MicrosoftOfficeUsedBy = analyze.CompanySectionsUsed.MicrOffSup;
-            vm.PhoneSupportUsedBy = analyze.CompanySectionsUsed.PhoneSupport;
-            vm.PrinterAdminUsedBy = analyze.CompanySectionsUsed.PrinterAdmin;
-            vm.ShareDriveUsedBy = analyze.CompanySectionsUsed.ShareDrive;
-            vm.Office365UsedBy = analyze.CompanySectionsUsed.Office365;
-            vm.SoftwareProvisionUsedBy = analyze.CompanySectionsUsed.SoftwareProvision;
-            vm.MonitoringUsedBy = analyze.CompanySectionsUsed.Monitoring;
+            vm.AcctAdminTest = analyze.CompanySectionsUsed.AcctAdmin;
+            vm.PcSuppTest = analyze.CompanySectionsUsed.PCSupport;
+            vm.MicroTest = analyze.CompanySectionsUsed.MicrOffSup;
+            vm.PhoneSupportTest = analyze.CompanySectionsUsed.PhoneSupport;
+            vm.PrinterAdminTest = analyze.CompanySectionsUsed.PrinterAdmin;
+            vm.ShareDriveTest = analyze.CompanySectionsUsed.ShareDrive;
+            vm.Office365Test = analyze.CompanySectionsUsed.Office365;
+            vm.SoftwareProvisionTest = analyze.CompanySectionsUsed.SoftwareProvision;
+            vm.MonitoringTest = analyze.CompanySectionsUsed.Monitoring;
             vm.AdminCheckBoxes = analyze.CompanyCheck;
             vm.ShareDriveCheckBoxes = getCheckBoxes(analyze.CompanySectionsUsed, "ShareDrive");
             vm.PhoneSupportCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "PhoneSupport");
@@ -48,14 +47,14 @@ namespace nStack.Helpers
             if (vm.MasterFile.Count != 0)
             {
                 vm.SortedData = analyze.SortBySection(vm.MasterFile);
-                vm.AcctAdminUsedBy = analyze.CompanySectionsUsed.AcctAdmin;
-                vm.PcSupportUsedBy = analyze.CompanySectionsUsed.PCSupport;
-                vm.MicrosoftOfficeUsedBy = analyze.CompanySectionsUsed.MicrOffSup;
-                vm.PhoneSupportUsedBy = analyze.CompanySectionsUsed.PhoneSupport;
-                vm.PrinterAdminUsedBy = analyze.CompanySectionsUsed.PrinterAdmin;
-                vm.ShareDriveUsedBy = analyze.CompanySectionsUsed.ShareDrive;
-                vm.SoftwareProvisionUsedBy = analyze.CompanySectionsUsed.SoftwareProvision;
-                vm.MonitoringUsedBy = analyze.CompanySectionsUsed.Monitoring;
+                vm.AcctAdminTest = analyze.CompanySectionsUsed.AcctAdmin;
+                vm.PcSuppTest = analyze.CompanySectionsUsed.PCSupport;
+                vm.MicroTest = analyze.CompanySectionsUsed.MicrOffSup;
+                vm.PhoneSupportTest = analyze.CompanySectionsUsed.PhoneSupport;
+                vm.PrinterAdminTest = analyze.CompanySectionsUsed.PrinterAdmin;
+                vm.ShareDriveTest = analyze.CompanySectionsUsed.ShareDrive;
+                vm.SoftwareProvisionTest = analyze.CompanySectionsUsed.SoftwareProvision;
+                vm.MonitoringTest = analyze.CompanySectionsUsed.Monitoring;
                 vm.SelectedCompany = getSelectedCompany(vm);
                 vm.AdminCheckBoxes = analyze.CompanyCheck;
                 vm.ShareDriveCheckBoxes = getCheckBoxes(analyze.CompanySectionsUsed, "ShareDrive");
