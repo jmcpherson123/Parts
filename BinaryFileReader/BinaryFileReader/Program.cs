@@ -16,13 +16,15 @@ namespace BinaryFileReader
             
 
 
-            writeSampleDatFile("sample.dat");
-            ReadDatFileSample();
+           writeSampleDatFile("sample.dat");
+            var str=ReadDatFileSample();
+            str.ForEach(Console.WriteLine);
             Console.ReadLine();
         }
 
-        public static string ReadDatFileSample()
+        public static List<string> ReadDatFileSample()
         {
+            List<string> readFile = new List<string>();
             string readString=null;
             var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             var BinFile = new System.IO.FileInfo(@"sample.DAT");
@@ -37,12 +39,12 @@ namespace BinaryFileReader
                     {
                         
                         var tester = ((string)binaryFormatter.Deserialize(binFile));
-                        
+                        readFile.Add(tester);
                         binPosition = binFile.Position;
                     }
                 }
             }
-            return readString;
+            return readFile;
         }
 
         public static void writeSampleDatFile(string fileName)
@@ -63,7 +65,7 @@ namespace BinaryFileReader
             {
                 using (var binAppend = new FileStream(@"sample.DAT", FileMode.Append))
                 {
-                    binaryFormatter.Serialize(binAppend, "This is aSecond attepmpt");
+                    binaryFormatter.Serialize(binAppend, "Party in the usA. Care for me care for me. Give to me ");
                     binAppend.Flush();
                 }
             }
