@@ -12,6 +12,7 @@ namespace nStack.Helpers
        //nStack Helper set up viewModel with Checkboxes and options. Get the selected checkbox 
         public static nStackViewModel setUpnStackWithoutSelection()
         {
+            //this is just a comment
             Analyzer analyze = new Analyzer();
             FileReader fileReader = new FileReader();
             nStackViewModel vm = new nStackViewModel();
