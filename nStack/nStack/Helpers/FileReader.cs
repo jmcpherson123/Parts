@@ -1,4 +1,6 @@
-﻿using OfficeOpenXml;
+﻿using nStack.Models;
+using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,35 +8,44 @@ using System.Web;
 
 namespace nStack.Helpers
 {
-    public class FileReader: BinFileObject
+    public class FileReader : BinFileObject
     {
         public int MasterIterator = 0;
 
-        public BinFileObject getBinFileObject(HttpPostedFileBase file, string CompanyName)
+        public UploadViewModel getBinFileObject(HttpPostedFileBase[] UploadedFiles,  UploadViewModel vm)
         {
-            Dictionary<string, Dictionary<string, List<string>>> ReadData = new Dictionary<string, Dictionary<string, List<string>>>();
-                int EndOfSection;
-               
-                BinaryReader bReader = new BinaryReader(file.InputStream);
-                byte[] byteData = bReader.ReadBytes(file.ContentLength);
+            List<BinFileObject> UploadedExcelFileContainer = new List<BinFileObject>();
+            Dictionary<string, Dictionary<string, List<string>>> DataOfReadFile = new Dictionary<string, Dictionary<string, List<string>>>();
+            int EndOfSection;
+            int companyTitleIterator = 0;
+
+           
+
+            foreach (var file in UploadedFiles)
+            {
+                BinFileObject FileRead = new BinFileObject();
+
+                //get Company name of the current sheet
+                vm.FileName = UploadedFiles[companyTitleIterator].FileName;        //will always be stored in of the current file 
+                var CompanyNamesList = vm.CompanyName.Split(',').ToList();
+                string CurrentCompanyName = CompanyNamesList[companyTitleIterator++];
+
+                BinaryReader binaryReader = new BinaryReader(file.InputStream);
+                byte[] readBytes = binaryReader.ReadBytes(file.ContentLength);
+
                 using (var pkg = new ExcelPackage(file.InputStream))
                 {
-                    var sheet = pkg.Workbook.Worksheets;
                     var ListOfWorksheets = pkg.Workbook.Worksheets.ToList();
-
-                    for (int iterator = 0; iterator < ListOfWorksheets.Count ; iterator++)
+                    for (int iterator = 0; iterator < ListOfWorksheets.Count; iterator++)   //Excel sheet might have multiple sheets.
                     {
-                        //Container single sheet
-
+                        //Need to clean up the way excel file is read
+                        MasterIterator = 0;
                         var sheetName = ListOfWorksheets[iterator].Name;
                         var WorksheetCellsContainer = ListOfWorksheets[iterator].Cells.ToList();
                         var NumberOfCells = WorksheetCellsContainer.Count();
-                        MasterIterator = 0;
                         string secHeadTitle;
-
                         List<string> sectionData = new List<string>();
                         Dictionary<string, List<string>> DataBank = new Dictionary<string, List<string>>();
-                        Dictionary<string, List<string>> containter = new Dictionary<string, List<string>>();
 
                         //Tester for a while loop RepleC
                         while (MasterIterator < NumberOfCells)
@@ -59,14 +70,27 @@ namespace nStack.Helpers
                                 MasterIterator++;
                             }
                         }
-                        ReadData.Add(ListOfWorksheets[iterator].Name, DataBank);
+                        DataOfReadFile.Add(ListOfWorksheets[iterator].Name, DataBank);
                     }
                 }
+                FileRead.container = DataOfReadFile;
+                FileRead.CompanyName= CurrentCompanyName;
+               
+                UploadedExcelFileContainer.Add(FileRead);
+            }
 
-            BinFileObject BinContainer = new BinFileObject();
-            BinContainer.container = ReadData;
-            BinContainer.CompanyName = CompanyName;
-            return BinContainer;
+            vm.ReadData = UploadedExcelFileContainer;
+            Save(vm.ReadData);
+           
+            return vm;
+        }
+
+        public void Save(List<BinFileObject> readData)
+        {
+           foreach(var sheet in readData)   //Save each File Separately
+            {
+                SaveData save = new SaveData(sheet);
+            }
         }
 
         public List<string> GetSectionData(int testIt, int numberOfCells, List<ExcelRangeBase> worksheetCellsContainer)
@@ -151,17 +175,16 @@ namespace nStack.Helpers
                 {
                     var binPosition = binFile.Position;
                     var binEnd = binFile.Length;
-                   
+
                     while (binPosition < binEnd)
                     {
                         BinFileObject binTester = new BinFileObject();
-                        binTester= ((BinFileObject)binaryFormatter.Deserialize(binFile));
+                        binTester = ((BinFileObject)binaryFormatter.Deserialize(binFile));
                         binContainer.Add(binTester);
                         binPosition = binFile.Position;
                     }
                 }
             }
-
 
             return binContainer;
         }
@@ -183,5 +206,7 @@ namespace nStack.Helpers
             }
             return address;
         }
+
+        
     }
 }
