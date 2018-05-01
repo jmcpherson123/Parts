@@ -56,7 +56,7 @@ namespace nStack.Helpers
                 vm.ShareDriveUsedBy = analyze.CompanySectionsUsed.ShareDrive;
                 vm.SoftwareProvisionUsedBy = analyze.CompanySectionsUsed.SoftwareProvision;
                 vm.MonitoringUsedBy = analyze.CompanySectionsUsed.Monitoring;
-                vm.SelectedCompany = getSelectedCompany(vm);
+               
                 vm.AdminCheckBoxes = analyze.CompanyCheck;
                 vm.ShareDriveCheckBoxes = getCheckBoxes(analyze.CompanySectionsUsed, "ShareDrive");
                 vm.PhoneSupportCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "PhoneSupport");
@@ -66,6 +66,7 @@ namespace nStack.Helpers
                 vm.Office365Checkboxes = getCheckBoxes(analyze.CompanySectionsUsed, "365");
                 vm.MicrosoftCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "Microsoft");
                 vm.MonitoringCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "Monit");
+                vm.SelectedCompany = getSelectedCompany(vm);
             }
             else
             {
@@ -190,9 +191,20 @@ namespace nStack.Helpers
         public static List<CheckboxHelper> getCheckBoxes(CompanyServiceObject CompanyService, string sheet)
         {
             List<CheckboxHelper> CheckboxContainer = new List<CheckboxHelper>();
+
             if (sheet.Contains("ShareDrive"))
             {
                 foreach (var CompanyName in CompanyService.ShareDrive)
+                {
+                    CheckboxHelper checkbox = new CheckboxHelper();
+                    checkbox.Name = CompanyName;
+                    checkbox.Checked = false;
+                    CheckboxContainer.Add(checkbox);
+                }
+            }
+            else if (sheet.Contains("Account"))
+            {
+                foreach (var CompanyName in CompanyService.AcctAdmin)
                 {
                     CheckboxHelper checkbox = new CheckboxHelper();
                     checkbox.Name = CompanyName;
