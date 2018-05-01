@@ -9,7 +9,7 @@ namespace nStack.Helpers
     {
         public List<List<string>> sortedFileSection;
         public List<CheckboxHelper> CompanyCheck = new List<CheckboxHelper>();
-       
+        public List<string> sectionUsed = new List<string>();
         public List<SortedData[]> Container = new List<SortedData[]>();
         public Dictionary<string, string> tracker = new Dictionary<string, string>();
         public CompanyServiceObject CompanySectionsUsed = new CompanyServiceObject();
@@ -51,7 +51,13 @@ namespace nStack.Helpers
             CompanySectionsUsed=CompaniesForAccountAdmin(Container);
             return Container;
         }
- 
+        public void getSectionUsed(List<BinFileObject> binFile)
+        {
+            foreach(var file in binFile)
+            {
+                var tt = file.container;
+            }
+        }
         public CompanyServiceObject CompaniesForAccountAdmin(List<SortedData[]> container)
         {
             CompanyServiceObject CompanyObject = new CompanyServiceObject();

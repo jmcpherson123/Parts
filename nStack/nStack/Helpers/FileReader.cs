@@ -19,8 +19,6 @@ namespace nStack.Helpers
             int EndOfSection;
             int companyTitleIterator = 0;
 
-           
-
             foreach (var file in UploadedFiles)
             {
                 BinFileObject FileRead = new BinFileObject();
@@ -58,7 +56,11 @@ namespace nStack.Helpers
                                     EndOfSection = GetSectionTitle(MasterIterator, NumberOfCells, WorksheetCellsContainer);
                                     secHeadTitle = WorksheetCellsContainer[EndOfSection].Text;
                                     sectionData = GetSectionData(EndOfSection, NumberOfCells, WorksheetCellsContainer);
-                                    DataBank.Add(secHeadTitle, sectionData);
+                                    if (sectionData.Count != 0)
+                                    {
+                                        DataBank.Add(secHeadTitle, sectionData);
+                                    }
+                                    
                                 }
                                 else
                                 {
@@ -78,7 +80,6 @@ namespace nStack.Helpers
                
                 UploadedExcelFileContainer.Add(FileRead);
             }
-
             vm.ReadData = UploadedExcelFileContainer;
             Save(vm.ReadData);
            

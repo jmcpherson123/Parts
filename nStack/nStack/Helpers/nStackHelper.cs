@@ -17,6 +17,7 @@ namespace nStack.Helpers
             nStackViewModel vm = new nStackViewModel();
             vm.MasterFile = fileReader.getMasterFile();
             vm.SortedData = analyze.SortBySection(vm.MasterFile);
+            analyze.getSectionUsed(vm.MasterFile);
             vm.AcctAdminUsedBy = analyze.CompanySectionsUsed.AcctAdmin;
             vm.PCSupportUsedBy = analyze.CompanySectionsUsed.PCSupport;
             vm.MicrosoftUsedBy = analyze.CompanySectionsUsed.MicrOffSup;
