@@ -14,6 +14,7 @@ namespace nStack.Models
         public Dictionary<string, List<string>> TabData;
         public List<string> SheetList;
         public List<SortedData[]> SortedData;
+        
         //Section Checkbox select
         public List<string> AcctAdminUsedBy = new List<string>();
         public List<string> PCSupportUsedBy = new List<string>();
@@ -25,19 +26,13 @@ namespace nStack.Models
         public List<string> PrinterAdminUsedBy = new List<string>();
         public List<string> MonitoringUsedBy = new List<string>();
 
-        //Sheet selected Company Checkbox 
-        public List<CheckboxHelper>AdminCheckBoxes { get; set; }
-        public List<CheckboxHelper> ShareDriveCheckBoxes { get; set; }
-        public List<CheckboxHelper> PhoneSupportCheckboxes { get; set; }
-        public List<CheckboxHelper> SoftwareProvisionCheckboxes { get; set; }
-        public List<CheckboxHelper> PrinterAdminCheckboxes { get; set; }
-        public List<CheckboxHelper> PCSupportCheckboxes { get; set; }
-        public List<CheckboxHelper> Office365Checkboxes { get; set; }
-        public List<CheckboxHelper> MicrosoftCheckboxes { get; set; }
-        public List<CheckboxHelper> MonitoringCheckboxes { get; set; }
+        //Sheet Selection Checkboxes 
+        public Dictionary<string, List<CheckboxHelper>> SheetCheckboxes { get; set; }
         public List<string> SelectedCompany = new List<string>();
         public int Switch = 0;
 
+        [Display(Name = "SZA")]
+        public Dictionary<string,bool> testOptions { get; set; }
 
         [Display(Name = "Account Admin")]
         public bool AccountAdminOption { get; set; }

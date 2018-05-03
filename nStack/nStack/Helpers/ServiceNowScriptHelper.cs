@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace nStack.Helpers
 {
+    //This object should no be needed. Will Remove in the future
     public class ServiceNowScriptHelper
     {
         public List<ServiceCatalog> clean_sc_task(string jsonObject, List<string> compareList)

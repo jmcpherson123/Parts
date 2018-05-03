@@ -4,391 +4,277 @@
 </head>
 @using (Html.BeginForm("nStack", "nStack", FormMethod.Post, new { nStackViewModel = Model }))
 {
-<div class="ContainerStack">
-    <h2>nStack</h2>
-    <div class="test">
-    </div>
+    <div class="ContainerStack">
+        <h2>nStack</h2>
+        <div class="test">
+        </div>
 
-    <div class="table_container">
-        <button class="buttonT" id="AcctAdminBox" onclick="AccountFunct()">Account Admin</button> @Html.HiddenFor(model => model.AccountAdminOption, new { id = "AccountAdmin" })
-        <button class="buttonT" onclick="ShareFunct()">Share Drive Administration</button> @Html.HiddenFor(model => model.ShareDriveOption, new { id = "ShareDrive" })
-        <button class="buttonT" onclick="PhoneFunct()">Phone Support</button>@Html.HiddenFor(model => model.PhoneSupportOption, new { id = "PhoneSupport" })
-
-        <button class="buttonT" onclick="PrinterFunct()">Printer Admin Option</button>@Html.HiddenFor(model => model.PrinterAdminOption, new { id = "PrinterAdmin" })
-        <button class="buttonT" onclick="SoftwareFunct()">Software Provision</button>@Html.HiddenFor(model => model.SoftwareProvOption, new { id = "SoftwareProv" })
-        <button class="buttonT" onclick="MicrosoftFunct()">Microsoft Office Support </button>@Html.HiddenFor(model => model.MicrosoftOfficeSupportOption, new { id = "MicrosoftOffice" })
-
-        <button class="buttonT" onclick="PCSupportFunct()">PC Support</button>@Html.HiddenFor(model => model.PCSupportOption, new { id = "PCSupport" })
-        <button class="buttonT" onclick="OfficeFunct()">Office 365</button>@Html.HiddenFor(model => model.Office365Option, new { id = "Office365" })
-        <button class="buttonT" onclick="MonitoringFunct()">Monitoring </button>@Html.HiddenFor(model => model.MonitoringOption, new { id = "Monitoring" })
-    </div>
-
-    <h3><b>Companies that use a Specified sheet</b></h3>
-    @if (Model.MasterFile.Count != 0)
-    {
-        <table>
-            <tbody>
-                <tr class="AccountAdmin" id="lol" value="false">
-                    <th axis="acctAdmin">Account Administration</th>
-                </tr>
-                <tr class="AccountAdmin" value="false">
-                    @for (int iterator = 0; iterator < Model.AdminCheckBoxes.Count; iterator++)
-                    {
-                        @Html.HiddenFor(model => model.AdminCheckBoxes[iterator].Name, new { id = Model.AdminCheckBoxes[iterator].Name })
-                        if (Model.AcctAdminUsedBy.Contains(Model.AdminCheckBoxes[iterator].Name))
-                        {
-                            <td><b>@Model.AdminCheckBoxes[iterator].Name</b>@Html.CheckBoxFor(model => model.AdminCheckBoxes[iterator].Checked, new { @class = "box" })</td>
-                        }
-                    }
-                </tr>
-                <tr class="ShareDrive">
-                    <th>ShareDrive</th>
-                </tr>
-                <tr class="ShareDrive">
-                    @for (int iterator = 0; iterator < Model.ShareDriveCheckBoxes.Count; iterator++)
-                    {
-                        string SDid = "shareDrive" + Model.ShareDriveCheckBoxes[iterator].Name;
-                        @Html.HiddenFor(model => model.ShareDriveCheckBoxes[iterator].Name, new { id = SDid })
-                        if (Model.ShareDriveUsedBy.Contains(Model.ShareDriveCheckBoxes[iterator].Name))
-                        {
-                            <td><b>@Model.ShareDriveCheckBoxes[iterator].Name</b>@Html.CheckBoxFor(model => model.ShareDriveCheckBoxes[iterator].Checked, new { @class = "box" })</td>
-                        }
-                    }
-                </tr>
-                <tr class="PhoneSupport">
-                    <th>Phone Support</th>
-                </tr>
-                <tr class="PhoneSupport">
-                    @for (int iterator = 0; iterator < Model.PhoneSupportCheckboxes.Count; iterator++)
-                    {
-                        string SDid = "PhoneSupport" + Model.PhoneSupportCheckboxes[iterator].Name;
-                        @Html.HiddenFor(model => model.PhoneSupportCheckboxes[iterator].Name, new { id = SDid })
-                        if (Model.PhoneSupportUsedBy.Contains(Model.PhoneSupportCheckboxes[iterator].Name))
-                        {
-                            <td><b>@Model.PhoneSupportCheckboxes[iterator].Name</b>@Html.CheckBoxFor(model => model.PhoneSupportCheckboxes[iterator].Checked, new { @class = "box" })</td>
-                        }
-                    }
-                </tr>
-                <tr class="SoftwareProv">
-                    <th>Software Provision</th>
-                </tr>
-                <tr class="SoftwareProv">
-                    @for (int iterator = 0; iterator < Model.SoftwareProvisionCheckboxes.Count; iterator++)
-                    {
-                        string SDid = "SoftwareProv" + Model.SoftwareProvisionCheckboxes[iterator].Name;
-                        @Html.HiddenFor(model => model.SoftwareProvisionCheckboxes[iterator].Name, new { id = SDid })
-                        if (Model.SoftwareProvisionUsedBy.Contains(Model.SoftwareProvisionCheckboxes[iterator].Name))
-                        {
-                            <td><b>@Model.SoftwareProvisionCheckboxes[iterator].Name</b>@Html.CheckBoxFor(model => model.SoftwareProvisionCheckboxes[iterator].Checked, new { @class = "box" })</td>
-                        }
-                    }
-                </tr>
-                <tr class="PrinterAdmin">
-                    <th>Printer Administration</th>
-                </tr>
-                <tr class="PrinterAdmin">
-                    @for (int iterator = 0; iterator < Model.PrinterAdminCheckboxes.Count; iterator++)
-                    {
-                        string SDid = "PrinterAdmin" + Model.PrinterAdminCheckboxes[iterator].Name;
-                        @Html.HiddenFor(model => model.PrinterAdminCheckboxes[iterator].Name, new { id = SDid })
-                        if (Model.PrinterAdminUsedBy.Contains(Model.PrinterAdminCheckboxes[iterator].Name))
-                        {
-                            <td><b>@Model.PrinterAdminCheckboxes[iterator].Name</b>@Html.CheckBoxFor(model => model.PrinterAdminCheckboxes[iterator].Checked, new { @class = "box" })</td>
-                        }
-                    }
-                </tr>
-                <tr class="PCSupport">
-                    <th>PC Support</th>
-                </tr>
-                <tr class="PCSupport">
-                    @for (int iterator = 0; iterator < Model.PCSupportCheckboxes.Count; iterator++)
-                    {
-                        string SDid = "PCSupport" + Model.PCSupportCheckboxes[iterator].Name;
-                        @Html.HiddenFor(model => model.PCSupportCheckboxes[iterator].Name, new { id = SDid })
-                        if (Model.PCSupportUsedBy.Contains(Model.PCSupportCheckboxes[iterator].Name))
-                        {
-                            <td><b>@Model.PCSupportCheckboxes[iterator].Name</b>@Html.CheckBoxFor(model => model.PCSupportCheckboxes[iterator].Checked, new { @class = "box" })</td>
-                        }
-                    }
-                </tr>
-                <tr class="Office365">
-                    <th>Office 365</th>
-                </tr>
-                <tr class="Office365">
-                    @for (int iterator = 0; iterator < Model.Office365Checkboxes.Count; iterator++)
-                    {
-                        string SDid = "Office365" + Model.Office365Checkboxes[iterator].Name;
-                        @Html.HiddenFor(model => model.Office365Checkboxes[iterator].Name, new { id = SDid })
-                        if (Model.Office365UsedBy.Contains(Model.Office365Checkboxes[iterator].Name))
-                        {
-                            <td><b>@Model.Office365Checkboxes[iterator].Name</b>@Html.CheckBoxFor(model => model.Office365Checkboxes[iterator].Checked, new { @class = "box" })</td>
-                        }
-                    }
-                </tr>
-                <tr class="MicrosoftOffice">
-                    <th>Microsoft Office</th>
-                </tr>
-                <tr class="MicrosoftOffice">
-                    @for (int iterator = 0; iterator < Model.MicrosoftCheckboxes.Count; iterator++)
-                    {
-                        string SDid = "MicrosoftOffice" + Model.MicrosoftCheckboxes[iterator].Name;
-                        @Html.HiddenFor(model => model.MicrosoftCheckboxes[iterator].Name, new { id = SDid })
-                        if (Model.MicrosoftUsedBy.Contains(Model.MicrosoftCheckboxes[iterator].Name))
-                        {
-                            <td><b>@Model.MicrosoftCheckboxes[iterator].Name</b>@Html.CheckBoxFor(model => model.MicrosoftCheckboxes[iterator].Checked, new { @class = "box" })</td>
-                        }
-                    }
-                </tr>
-                <tr class="Monitoring">
-                    <th>Monitoring</th>
-                </tr>
-                <tr class="Monitoring">
-                    @for (int iterator = 0; iterator < Model.MonitoringCheckboxes.Count; iterator++)
-                    {
-                        string SDid = "Monitoring" + Model.MonitoringCheckboxes[iterator].Name;
-                        @Html.HiddenFor(model => model.MonitoringCheckboxes[iterator].Name, new { id = SDid })
-                        if (Model.MonitoringUsedBy.Contains(Model.MonitoringCheckboxes[iterator].Name))
-                        {
-                            <td><b>@Model.MonitoringCheckboxes[iterator].Name</b>@Html.CheckBoxFor(model => model.MonitoringCheckboxes[iterator].Checked, new { @class = "box" })</td>
-                        }
-                    }
-                </tr>
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <h4  class="alert-danger"> There is No master Sheet ot pull from</h4>
-    }
-
-    <br />
-    <input type="submit" value="Get Data" />
-
-    @if (Model.MasterFile.Count != 0)
-    {
-        foreach (var tester in Model.SortedData)
-        {
-            if (Model.SelectedCompany.Contains(tester[0].CompanyName))
+        <div class="table_container">
+            @foreach (var tt in Model.testOptions)
             {
-                if (Model.AccountAdminOption == true)
-                {
-                    <h3>@tester[0].CompanyName</h3>
-                    <table>
-                        <tbody>
-                            <tr>
-                                @foreach (var test in tester[0].KeyData)
+                string CheckboxID = tt.Key.Replace(" ", "");
+                char[] ha = CheckboxID.ToCharArray();
+                <button class="buttonT" id=@tt onclick="AccountFunct(\''+CheckboxID+'\')">@tt.Key</button> @Html.HiddenFor(model => model.testOptions[tt.Key], new { id = CheckboxID })
+            }
+          
+        </div>
+
+        <h3><b>Companies that use a Specified sheet</b></h3>
+        @if (Model.MasterFile.Count != 0)
+        {
+            <table>
+                <tbody>
+                    <tr class="AccountAdmin" id="lol" value="false">
+                        <th axis="acctAdmin">Account Administration</th>
+                    </tr>
+                    <tr class="AccountAdmin" value="false">
+                        @foreach (var Sheet in Model.SheetCheckboxes)
+                        {
+                            for (int iterator = 0; iterator < Sheet.Value.Count; iterator++)
+                            {
+                                @Html.HiddenFor(model => Sheet.Value[iterator], new { id = Sheet.Value[iterator].Name })
+                                if (Model.AcctAdminUsedBy.Contains(Sheet.Value[iterator].Name))
                                 {
-                                    for (int iter = 0; iter < test.Value.Count; iter++)
-                                    {
-                                        <td><b class="alert-info">@test.Key</b><br /><b>@test.Value.ElementAt(iter)</b><br />@test.Value.ElementAt(++iter)</td>
-                                    }
+                                    <td><b>@Sheet.Value[iterator].Name</b>@Html.CheckBoxFor(model => Sheet.Value[iterator].Checked, new { @class = "box" })</td>
                                 }
-                            </tr>
-                        </tbody>
-                    </table>
+                            }
+                        }
+                    </tr>
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <h4 class="alert-danger"> There is No master Sheet ot pull from</h4>
+        }
+
+        <br />
+        <input type="submit" value="Get Data" />
+
+        @if (Model.MasterFile.Count != 0)
+        {
+            foreach (var tester in Model.SortedData)
+            {
+                if (Model.SelectedCompany.Contains(tester[0].CompanyName))
+                {
+                    if (Model.AccountAdminOption == true)
+                    {
+                        <h3>@tester[0].CompanyName</h3>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    @foreach (var test in tester[0].KeyData)
+                                    {
+                                        for (int iter = 0; iter < test.Value.Count; iter++)
+                                        {
+                                            <td><b class="alert-info">@test.Key</b><br /><b>@test.Value.ElementAt(iter)</b><br />@test.Value.ElementAt(++iter)</td>
+                                        }
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                    if (Model.ShareDriveOption == true)
+                    {
+                        <h3>@tester[1].CompanyName</h3>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    @foreach (var test in tester[1].KeyData)
+                                    {
+
+                                        for (int iter = 0; iter < test.Value.Count; iter++)
+                                        {
+                                            <td><b class="alert-info">@test.Key</b><br /><b>@test.Value.ElementAt(iter)</b><br />@test.Value.ElementAt(++iter)</td>
+                                        }
+
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+
+                    if (Model.PhoneSupportOption == true)
+                    {
+                        <h3>@tester[2].CompanyName</h3>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    @foreach (var test in tester[2].KeyData)
+                                    {
+
+                                        for (int iter = 0; iter < test.Value.Count; iter++)
+                                        {
+                                            <td><b class="alert-info">@test.Key</b><br /><b>@test.Value.ElementAt(iter)</b><br />@test.Value.ElementAt(++iter)</td>
+                                        }
+
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+
+                    if (Model.SoftwareProvOption == true)
+                    {
+                        <h3>@tester[3].CompanyName</h3>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    @foreach (var test in tester[3].KeyData)
+                                    {
+
+                                        for (int iter = 0; iter < test.Value.Count; iter++)
+                                        {
+                                            <td><b class="alert-info">@test.Key</b><br /><b>@test.Value.ElementAt(iter)</b><br />@test.Value.ElementAt(++iter)</td>
+                                        }
+
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+
+                    if (Model.PrinterAdminOption == true)
+                    {
+                        <h3>@tester[4].CompanyName</h3>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    @foreach (var test in tester[4].KeyData)
+                                    {
+
+                                        for (int iter = 0; iter < test.Value.Count; iter++)
+                                        {
+                                            <td><b class="alert-info">@test.Key</b><br /><b>@test.Value.ElementAt(iter)</b><br />@test.Value.ElementAt(++iter)</td>
+                                        }
+
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+
+                    if (Model.PCSupportOption == true)
+                    {
+                        <h3>@tester[5].CompanyName</h3>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    @foreach (var test in tester[5].KeyData)
+                                    {
+
+                                        for (int iter = 0; iter < test.Value.Count; iter++)
+                                        {
+                                            <td><b class="alert-info">@test.Key</b><br /><b>@test.Value.ElementAt(iter)</b><br />@test.Value.ElementAt(++iter)</td>
+                                        }
+
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+
+                    if (Model.Office365Option == true)
+                    {
+                        <h3>@tester[6].CompanyName</h3>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    @foreach (var test in tester[6].KeyData)
+                                    {
+
+                                        for (int iter = 0; iter < test.Value.Count; iter++)
+                                        {
+                                            <td><b class="alert-info">@test.Key</b><br /><b>@test.Value.ElementAt(iter)</b><br />@test.Value.ElementAt(++iter)</td>
+                                        }
+
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+
+                    if (Model.MicrosoftOfficeSupportOption == true)
+                    {
+                        <h3>@tester[7].CompanyName</h3>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    @foreach (var test in tester[7].KeyData)
+                                    {
+
+                                        for (int iter = 0; iter < test.Value.Count; iter++)
+                                        {
+                                            <td><b class="alert-info">@test.Key</b><br /><b>@test.Value.ElementAt(iter)</b><br />@test.Value.ElementAt(++iter)</td>
+                                        }
+
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+
+                    if (Model.MonitoringOption == true)
+                    {
+                        <h3>@tester[8].CompanyName</h3>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    @foreach (var test in tester[8].QandAData)
+                                    {
+
+                                        for (int iter = 0; iter < test.Count; iter++)
+                                        {
+                                            <td><br /><b>@test[iter]</b><br />@test[++iter]</td>
+                                        }
+
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
                 }
-                if (Model.ShareDriveOption == true)
+            }
+        }
+
+        <h4> Raw Data Lay out</h4>
+        <button type="button" class="btn btn-primary" id="AllButton"> <span class="glyphicon glyphicon-tasks"> All </span></button>
+        <button type="button" class="btn btn-danger" id="hideButton"> <span class="glyphicon glyphicon-remove"> Hide </span></button>
+        <button type="button" class="btn btn-default" id="EditButton"><span class="glyphicon glyphicon-pencil" id="editIcon"> Edit </span></button>
+        <div class="RawDataContainer">
+            @foreach (var file in Model.MasterFile)
+            {
+                <div>
+                    <h2>@file.CompanyName</h2>
+                </div>
+                foreach (var title in file.container)
                 {
-                    <h3>@tester[1].CompanyName</h3>
-                    <table>
+                    <table class="table">
+
+                        <h4 class="cell">
+                            @title.Key
+                        </h4>
                         <tbody>
-                            <tr>
-                                @foreach (var test in tester[1].KeyData)
-                                {
-
-                                    for (int iter = 0; iter < test.Value.Count; iter++)
+                            @foreach (var subTitle in title.Value)
+                            {
+                                <tr>
+                                    <th>
+                                        @subTitle.Key
+                                    </th>
+                                    @for (int i = 0; i < subTitle.Value.Count; i++)
                                     {
-                                        <td><b class="alert-info">@test.Key</b><br /><b>@test.Value.ElementAt(iter)</b><br />@test.Value.ElementAt(++iter)</td>
+                                        var question = subTitle.Value.ElementAt(i);
+                                        var answer = subTitle.Value.ElementAt(++i);
+                                        <td class="cell"><b>@question</b> <br /> @answer</td>
                                     }
-
-                                }
-                            </tr>
-                        </tbody>
-                    </table>
-                }
-
-                if (Model.PhoneSupportOption == true)
-                {
-                    <h3>@tester[2].CompanyName</h3>
-                    <table>
-                        <tbody>
-                            <tr>
-                                @foreach (var test in tester[2].KeyData)
-                                {
-
-                                    for (int iter = 0; iter < test.Value.Count; iter++)
-                                    {
-                                        <td><b class="alert-info">@test.Key</b><br /><b>@test.Value.ElementAt(iter)</b><br />@test.Value.ElementAt(++iter)</td>
-                                    }
-
-                                }
-                            </tr>
-                        </tbody>
-                    </table>
-                }
-
-                if (Model.SoftwareProvOption == true)
-                {
-                    <h3>@tester[3].CompanyName</h3>
-                    <table>
-                        <tbody>
-                            <tr>
-                                @foreach (var test in tester[3].KeyData)
-                                {
-
-                                    for (int iter = 0; iter < test.Value.Count; iter++)
-                                    {
-                                        <td><b class="alert-info">@test.Key</b><br /><b>@test.Value.ElementAt(iter)</b><br />@test.Value.ElementAt(++iter)</td>
-                                    }
-
-                                }
-                            </tr>
-                        </tbody>
-                    </table>
-                }
-
-                if (Model.PrinterAdminOption == true)
-                {
-                    <h3>@tester[4].CompanyName</h3>
-                    <table>
-                        <tbody>
-                            <tr>
-                                @foreach (var test in tester[4].KeyData)
-                                {
-
-                                    for (int iter = 0; iter < test.Value.Count; iter++)
-                                    {
-                                        <td><b class="alert-info">@test.Key</b><br /><b>@test.Value.ElementAt(iter)</b><br />@test.Value.ElementAt(++iter)</td>
-                                    }
-
-                                }
-                            </tr>
-                        </tbody>
-                    </table>
-                }
-
-                if (Model.PCSupportOption == true)
-                {
-                    <h3>@tester[5].CompanyName</h3>
-                    <table>
-                        <tbody>
-                            <tr>
-                                @foreach (var test in tester[5].KeyData)
-                                {
-
-                                    for (int iter = 0; iter < test.Value.Count; iter++)
-                                    {
-                                        <td><b class="alert-info">@test.Key</b><br /><b>@test.Value.ElementAt(iter)</b><br />@test.Value.ElementAt(++iter)</td>
-                                    }
-
-                                }
-                            </tr>
-                        </tbody>
-                    </table>
-                }
-
-                if (Model.Office365Option == true)
-                {
-                    <h3>@tester[6].CompanyName</h3>
-                    <table>
-                        <tbody>
-                            <tr>
-                                @foreach (var test in tester[6].KeyData)
-                                {
-
-                                    for (int iter = 0; iter < test.Value.Count; iter++)
-                                    {
-                                        <td><b class="alert-info">@test.Key</b><br /><b>@test.Value.ElementAt(iter)</b><br />@test.Value.ElementAt(++iter)</td>
-                                    }
-
-                                }
-                            </tr>
-                        </tbody>
-                    </table>
-                }
-
-                if (Model.MicrosoftOfficeSupportOption == true)
-                {
-                    <h3>@tester[7].CompanyName</h3>
-                    <table>
-                        <tbody>
-                            <tr>
-                                @foreach (var test in tester[7].KeyData)
-                                {
-
-                                    for (int iter = 0; iter < test.Value.Count; iter++)
-                                    {
-                                        <td><b class="alert-info">@test.Key</b><br /><b>@test.Value.ElementAt(iter)</b><br />@test.Value.ElementAt(++iter)</td>
-                                    }
-
-                                }
-                            </tr>
-                        </tbody>
-                    </table>
-                }
-
-                if (Model.MonitoringOption == true)
-                {
-                    <h3>@tester[8].CompanyName</h3>
-                    <table>
-                        <tbody>
-                            <tr>
-                                @foreach (var test in tester[8].QandAData)
-                                {
-
-                                    for (int iter = 0; iter < test.Count; iter++)
-                                    {
-                                        <td><br /><b>@test[iter]</b><br />@test[++iter]</td>
-                                    }
-
-                                }
-                            </tr>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 }
             }
-        }
-    }
-
-
-    <h4> Raw Data Lay out</h4>
-    <button type="button" class="btn btn-primary" id="AllButton"> <span class="glyphicon glyphicon-tasks"> All </span></button>
-    <button type="button" class="btn btn-danger" id="hideButton"> <span class="glyphicon glyphicon-remove"> Hide </span></button>
-    <button type="button" class="btn btn-default" id="EditButton"><span class="glyphicon glyphicon-pencil" id="editIcon"> Edit </span></button>
-    <div class="RawDataContainer">
-        @foreach (var file in Model.MasterFile)
-        {
-            <div>
-                <h2>@file.CompanyName</h2>
-            </div>
-            foreach (var title in file.container)
-            {
-                <table class="table">
-
-                    <h4 class="cell">
-                        @title.Key
-                    </h4>
-                    <tbody>
-                        @foreach (var subTitle in title.Value)
-                        {
-                            <tr>
-                                <th>
-                                    @subTitle.Key
-                                </th>
-                                @for (int i = 0; i < subTitle.Value.Count; i++)
-                                {
-                                    var question = subTitle.Value.ElementAt(i);
-                                    var answer = subTitle.Value.ElementAt(++i);
-                                    <td class="cell"><b>@question</b> <br /> @answer</td>
-                                }
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            }
-        }
+        </div>
     </div>
-</div>
 }
 
 @Scripts.Render("~/bundles/jquery")
@@ -410,12 +296,12 @@
         $(".RawDataContainer").hide();
         $("#hideButton").hide();
 
-        if ($("#AccountAdmin").val() == "false") {
-            $(".AccountAdmin").hide();
+        if ($("#Account").val() == "false") {
+            $(".Account").hide();
         }
 
-        if ($("#AccountAdmin").val() == "true") {
-            $(".AccountAdmin").show();
+        if ($("#Account").val() == "true") {
+            $(".Account").show();
         }
 
         if ($("#ShareDrive").val() == "false") {
@@ -440,8 +326,8 @@
 
         if ($("#PrinterAdmin").val() == "true") {
             $(".PrinterAdmin").show();
-        } 
-        
+        }
+
         if ($("#SoftwareProv").val() == "false") {
             $(".SoftwareProv").hide();
         }
@@ -473,7 +359,7 @@
         if ($("#Office365").val() == "true") {
             $(".Office365").show();
         }
-        
+
         if ($("#Monitoring").val() == "false") {
             $(".Monitoring").hide();
         }
@@ -484,9 +370,8 @@
 
         $("#editIcon").click(function () {
             var val = $(".cell").attr("contenteditable", "true");
-        }) 
+        })
 
-      
         $("#AllButton").click(function () {
 
             $(".RawDataContainer").show();
@@ -499,7 +384,10 @@
         })
     }
     window.onload = myFunct();
-    function AccountFunct() {
+    function AccountFunct(x) {
+        alert("Before");
+        alert(x);
+        alert("after");
         if ($("#AccountAdmin").val() == "False" || $("#AccountAdmin").val() == "false") {
             $("#AccountAdmin").val(true);
         }
@@ -554,7 +442,7 @@
             $("#MicrosoftOffice").val(false)
         }
     }
-    
+
     function PCSupportFunct() {
         if ($("#PCSupport").val() == "False" || $("#PCSupport").val() == "false") {
             $("#PCSupport").val(true);

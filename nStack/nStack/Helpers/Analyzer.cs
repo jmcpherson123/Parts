@@ -1,5 +1,4 @@
 ﻿using nStack.ModelObjects;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,57 +6,53 @@ namespace nStack.Helpers
 {
     public class Analyzer
     {
-        public List<List<string>> sortedFileSection;
         public List<CheckboxHelper> CompanyCheck = new List<CheckboxHelper>();
-        public List<string> sectionUsed = new List<string>();
         public List<SortedData[]> Container = new List<SortedData[]>();
-        public Dictionary<string, string> tracker = new Dictionary<string, string>();
+        public List<string> SheetNames = new List<string>();
         public CompanyServiceObject CompanySectionsUsed = new CompanyServiceObject();
+
         public List<SortedData[]> SortBySection(List<BinFileObject> rawFile)
         {
-            int NumberOfMasterFiles=rawFile.Count();
-            foreach(BinFileObject binFile in rawFile)
+            int NumberOfMasterFiles = rawFile.Count();
+            foreach (BinFileObject binFile in rawFile)
             {
                 List<string> TitleKeys = binFile.container.Keys.ToList();
                 CheckboxHelper checkbox = new CheckboxHelper();
-                var tt2 = binFile.container.Values;
+                SheetNames = binFile.container.Keys.ToList();
                 SortedData[] SortedData = new SortedData[binFile.container.Keys.Count];
                 int iterator = 0;
                 foreach (Dictionary<string, List<string>> form in binFile.container.Values)
                 {
                     SortedData[iterator] = new SortedData();
-                  
                     SortedData[iterator].CompanyName = binFile.CompanyName;
                     SortedData[iterator].SheetTitle = binFile.container.Keys.ElementAt(iterator);
                     SortedData[iterator].SubTitle = getSectionTitles(form);
                     SortedData[iterator].QandAData = getQuestionsAnswers(form);
                     SortedData[iterator].PermissionsData = getPermissionForSheet(SortedData[iterator].QandAData);
-                    SortedData[iterator].KeyData.Add("Permission",getPermissionForSheet(SortedData[iterator].QandAData));
+                    SortedData[iterator].KeyData.Add("Permission", getPermissionForSheet(SortedData[iterator].QandAData));
                     SortedData[iterator].InputData = getInputForSheet(SortedData[iterator].QandAData);
-                    SortedData[iterator].KeyData.Add("Input",getInputForSheet(SortedData[iterator].QandAData));
+                    SortedData[iterator].KeyData.Add("Input", getInputForSheet(SortedData[iterator].QandAData));
                     SortedData[iterator].ApprovalData = getApprovalForSheet(SortedData[iterator].QandAData);
-                    SortedData[iterator].KeyData.Add("Approval",getApprovalForSheet(SortedData[iterator].QandAData));
+                    SortedData[iterator].KeyData.Add("Approval", getApprovalForSheet(SortedData[iterator].QandAData));
                     SortedData[iterator].ProvideData = getProvideForSheet(SortedData[iterator].QandAData);
-                    SortedData[iterator].KeyData.Add("Provide",getProvideForSheet(SortedData[iterator].QandAData));
+                    SortedData[iterator].KeyData.Add("Provide", getProvideForSheet(SortedData[iterator].QandAData));
                     iterator++;
                 }
-
                 //Add by the file
-                checkbox.Name = binFile.CompanyName;
-                CompanyCheck.Add(checkbox);
                 Container.Add(SortedData);
-
             }
-            CompanySectionsUsed=CompaniesForAccountAdmin(Container);
+            CompanySectionsUsed = CompaniesForAccountAdmin(Container);
             return Container;
         }
+
         public void getSectionUsed(List<BinFileObject> binFile)
         {
-            foreach(var file in binFile)
+            foreach (var file in binFile)
             {
                 var tt = file.container;
             }
         }
+
         public CompanyServiceObject CompaniesForAccountAdmin(List<SortedData[]> container)
         {
             CompanyServiceObject CompanyObject = new CompanyServiceObject();
@@ -72,9 +67,9 @@ namespace nStack.Helpers
             List<string> MonitoringCompanies = new List<string>();
             foreach (var Set in container)
             {
-                for(int SortIterator=0; SortIterator < Set.Length; SortIterator++)
+                for (int SortIterator = 0; SortIterator < Set.Length; SortIterator++)
                 {
-                    if (Set[SortIterator].SheetTitle.Contains("Account Admin")&&Set[SortIterator].QandAData[0].Count != 0)
+                    if (Set[SortIterator].SheetTitle.Contains("Account Admin") && Set[SortIterator].QandAData[0].Count != 0)
                     {
                         if (!AcctAdminCompanies.Contains(Set[SortIterator].CompanyName))
                         {

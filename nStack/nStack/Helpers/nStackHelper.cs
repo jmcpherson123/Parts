@@ -1,23 +1,21 @@
 ﻿using nStack.ModelObjects;
 using nStack.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace nStack.Helpers
 {
     public class nStackHelper
     {
-       //nStack Helper set up viewModel with Checkboxes and options. Get the selected checkbox 
+        //nStack Helper set up viewModel with Checkboxes and options. Get the selected checkbox
         public static nStackViewModel setUpnStackWithoutSelection()
         {
+            Dictionary<string, List<CheckboxHelper>> CheckboxesUsed = new Dictionary<string, List<CheckboxHelper>>();
             Analyzer analyze = new Analyzer();
             FileReader fileReader = new FileReader();
             nStackViewModel vm = new nStackViewModel();
             vm.MasterFile = fileReader.getMasterFile();
             vm.SortedData = analyze.SortBySection(vm.MasterFile);
-            analyze.getSectionUsed(vm.MasterFile);
+            var sheetName = analyze.SheetNames;
             vm.AcctAdminUsedBy = analyze.CompanySectionsUsed.AcctAdmin;
             vm.PCSupportUsedBy = analyze.CompanySectionsUsed.PCSupport;
             vm.MicrosoftUsedBy = analyze.CompanySectionsUsed.MicrOffSup;
@@ -27,15 +25,11 @@ namespace nStack.Helpers
             vm.Office365UsedBy = analyze.CompanySectionsUsed.Office365;
             vm.SoftwareProvisionUsedBy = analyze.CompanySectionsUsed.SoftwareProvision;
             vm.MonitoringUsedBy = analyze.CompanySectionsUsed.Monitoring;
-            vm.AdminCheckBoxes = analyze.CompanyCheck;
-            vm.ShareDriveCheckBoxes = getCheckBoxes(analyze.CompanySectionsUsed, "ShareDrive");
-            vm.PhoneSupportCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "PhoneSupport");
-            vm.SoftwareProvisionCheckboxes= getCheckBoxes(analyze.CompanySectionsUsed, "SoftwareProvision");
-            vm.PrinterAdminCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "PrinterAdmin");
-            vm.PCSupportCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "PCSupport");
-            vm.Office365Checkboxes = getCheckBoxes(analyze.CompanySectionsUsed, "365");
-            vm.MicrosoftCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "Microsoft");
-            vm.MonitoringCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "Monit");
+
+            //tester for sub of checkbox
+
+            vm.SheetCheckboxes = setUpCheckboxes(sheetName, analyze);
+            vm.testOptions = setUpSlectionCheckboxes(sheetName);
             return vm;
         }
 
@@ -43,11 +37,12 @@ namespace nStack.Helpers
         {
             Analyzer analyze = new Analyzer();
             FileReader fileReader = new FileReader();
-    
+
             vm.MasterFile = fileReader.getMasterFile();
             if (vm.MasterFile.Count != 0)
             {
                 vm.SortedData = analyze.SortBySection(vm.MasterFile);
+                var sheetName = analyze.SheetNames;
                 vm.AcctAdminUsedBy = analyze.CompanySectionsUsed.AcctAdmin;
                 vm.PCSupportUsedBy = analyze.CompanySectionsUsed.PCSupport;
                 vm.MicrosoftUsedBy = analyze.CompanySectionsUsed.MicrOffSup;
@@ -56,133 +51,36 @@ namespace nStack.Helpers
                 vm.ShareDriveUsedBy = analyze.CompanySectionsUsed.ShareDrive;
                 vm.SoftwareProvisionUsedBy = analyze.CompanySectionsUsed.SoftwareProvision;
                 vm.MonitoringUsedBy = analyze.CompanySectionsUsed.Monitoring;
-               
-                vm.AdminCheckBoxes = analyze.CompanyCheck;
-                vm.ShareDriveCheckBoxes = getCheckBoxes(analyze.CompanySectionsUsed, "ShareDrive");
-                vm.PhoneSupportCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "PhoneSupport");
-                vm.SoftwareProvisionCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "SoftwareProvision");
-                vm.PrinterAdminCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "PrinterAdmin");
-                vm.PCSupportCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "PCSupport");
-                vm.Office365Checkboxes = getCheckBoxes(analyze.CompanySectionsUsed, "365");
-                vm.MicrosoftCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "Microsoft");
-                vm.MonitoringCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "Monit");
+
+                /* vm.AdminCheckBoxes = analyze.CompanyCheck;
+                 vm.ShareDriveCheckBoxes = getCheckBoxes(analyze.CompanySectionsUsed, "ShareDrive");
+                 vm.PhoneSupportCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "PhoneSupport");
+                 vm.SoftwareProvisionCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "SoftwareProvision");
+                 vm.PrinterAdminCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "PrinterAdmin");
+                 vm.PCSupportCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "PCSupport");
+                 vm.Office365Checkboxes = getCheckBoxes(analyze.CompanySectionsUsed, "365");
+                 vm.MicrosoftCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "Microsoft");
+                 vm.MonitoringCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "Monit");
+                 */
+                vm.SheetCheckboxes = setUpCheckboxes(analyze.SheetNames, analyze);
                 vm.SelectedCompany = getSelectedCompany(vm);
             }
             else
             {
                 //no master file exist
             }
-          
+
             return vm;
         }
 
         public static List<string> getSelectedCompany(nStackViewModel vm)
         {
             List<string> selected = new List<string>();
-            if (vm.AccountAdminOption == true)
+            foreach (var checkbox in vm.testOptions)
             {
-                foreach (var Company in vm.AdminCheckBoxes)
+                if (checkbox.Value == true)
                 {
-                    if (Company.Checked == true)
-                    {
-                        selected.Add(Company.Name);
-                    }
-                }
-            }
-
-            if (vm.ShareDriveOption == true)
-            {
-                foreach (var Company in vm.ShareDriveCheckBoxes)
-                {
-                    if (Company.Checked == true)
-                    {
-                        selected.Add(Company.Name);
-                    }
-                }
-            }
-
-            if (vm.PhoneSupportOption == true)
-            {
-                foreach (var Company in vm.PhoneSupportCheckboxes)
-                {
-                    if (Company.Checked == true)
-                    {
-                        selected.Add(Company.Name);
-                    }
-                }
-            }
-
-            if (vm.SoftwareProvOption == true)
-            {
-                foreach (var Company in vm.SoftwareProvisionCheckboxes)
-                {
-                    if (Company.Checked == true)
-                    {
-                        selected.Add(Company.Name);
-                    }
-                }
-            }
-
-            if (vm.PrinterAdminOption == true)
-            {
-                if (vm.PrinterAdminCheckboxes!=null)
-                {
-                    foreach (var Company in vm.PrinterAdminCheckboxes)
-                    {
-                        if (Company.Checked == true)
-                        {
-                            selected.Add(Company.Name);
-                        }
-                    }
-                }
-                else
-                {
-                    selected.Add("None");
-                }
-                
-            }
-
-            if (vm.PCSupportOption == true)
-            {
-                foreach (var Company in vm.PCSupportCheckboxes)
-                {
-                    if (Company.Checked == true)
-                    {
-                        selected.Add(Company.Name);
-                    }
-                }
-            }
-
-            if (vm.Office365Option == true)
-            {
-                foreach (var Company in vm.Office365Checkboxes)
-                {
-                    if (Company.Checked == true)
-                    {
-                        selected.Add(Company.Name);
-                    }
-                }
-            }
-
-            if (vm.MicrosoftOfficeSupportOption == true)
-            {
-                foreach (var Company in vm.MicrosoftCheckboxes)
-                {
-                    if (Company.Checked == true)
-                    {
-                        selected.Add(Company.Name);
-                    }
-                }
-            }
-
-            if (vm.MonitoringOption == true)
-            {
-                foreach (var Company in vm.MonitoringCheckboxes)
-                {
-                    if (Company.Checked == true)
-                    {
-                        selected.Add(Company.Name);
-                    }
+                    selected.Add(checkbox.Key);
                 }
             }
             return selected;
@@ -242,7 +140,6 @@ namespace nStack.Helpers
                     CheckboxContainer.Add(checkbox);
                 }
             }
-
             else if (sheet.Contains("PCSupport"))
             {
                 foreach (var CompanyName in CompanyService.PCSupport)
@@ -253,7 +150,6 @@ namespace nStack.Helpers
                     CheckboxContainer.Add(checkbox);
                 }
             }
-
             else if (sheet.Contains("365"))
             {
                 foreach (var CompanyName in CompanyService.Office365)
@@ -264,7 +160,6 @@ namespace nStack.Helpers
                     CheckboxContainer.Add(checkbox);
                 }
             }
-
             else if (sheet.Contains("Microsoft"))
             {
                 foreach (var CompanyName in CompanyService.MicrOffSup)
@@ -275,7 +170,6 @@ namespace nStack.Helpers
                     CheckboxContainer.Add(checkbox);
                 }
             }
-
             else if (sheet.Contains("Monit"))
             {
                 foreach (var stat in CompanyService.Monitoring)
@@ -287,6 +181,28 @@ namespace nStack.Helpers
                 }
             }
             return CheckboxContainer;
+        }
+
+        public static Dictionary<string, List<CheckboxHelper>> setUpCheckboxes(List<string> SheetName, Analyzer analyzeObject)
+        {
+            Dictionary<string, List<CheckboxHelper>> CheckboxesUsed = new Dictionary<string, List<CheckboxHelper>>();
+            foreach (var sheetTitle in SheetName)
+            {
+                List<CheckboxHelper> UsedSheetCheckboxList = new List<CheckboxHelper>();
+                UsedSheetCheckboxList = getCheckBoxes(analyzeObject.CompanySectionsUsed, sheetTitle);
+                CheckboxesUsed.Add(sheetTitle, UsedSheetCheckboxList);
+            }
+            return CheckboxesUsed;
+        }
+
+        public static Dictionary<string, bool> setUpSlectionCheckboxes(List<string> SheetNames)
+        {
+            Dictionary<string, bool> tempList = new Dictionary<string, bool>();
+            foreach (var name in SheetNames)
+            {
+                tempList.Add(name, false);
+            }
+            return tempList;
         }
     }
 }
