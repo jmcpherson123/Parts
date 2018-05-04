@@ -13,7 +13,6 @@ namespace SampleWeb.Models
         public string exampleString;
         public string getSentence { get; set; }
 
-     
         public void runTestString()
         {
             originalString = "this is a tester string";
@@ -25,6 +24,14 @@ namespace SampleWeb.Models
             StringSorter sorter = new StringSorter(sentence);
             string temporaryString = sorter.sortedString;
             return temporaryString;
+        }
+
+        public List<int> SortInteger(int[] IntList)
+        {
+            List<int> sortedInts = new List<int>();
+
+            return sortedInts;
+
         }
     }
 }

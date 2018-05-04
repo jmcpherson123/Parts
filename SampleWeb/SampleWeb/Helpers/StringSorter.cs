@@ -36,7 +36,6 @@ namespace SampleWeb.Helpers
 
             foreach (var word in brokenLine)
             {
-                //Console.WriteLine(word);
                 sortedString = sortedString + word + " ";
             }
             return sortedString;
