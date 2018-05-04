@@ -13,19 +13,19 @@
             @foreach (var tt in Model.testOptions)
             {
                 string CheckboxID = tt.Key.Replace(" ", "");
-                char[] ha = CheckboxID.ToCharArray();
-                <button class="buttonT" id=@tt onclick="AccountFunct(\''+CheckboxID+'\')">@tt.Key</button> @Html.HiddenFor(model => model.testOptions[tt.Key], new { id = CheckboxID })
+                
+                <button class="buttonT" id=@tt onclick="AccountFunct(@CheckboxID)">@tt.Key</button> @Html.HiddenFor(model => model.testOptions[tt.Key], new { id = CheckboxID })
             }
           
         </div>
 
         <h3><b>Companies that use a Specified sheet</b></h3>
-        @if (Model.MasterFile.Count != 0)
+        @if (Model.SelectedCompany.Count!=0)
         {
             <table>
                 <tbody>
-                    <tr class="AccountAdmin" id="lol" value="false">
-                        <th axis="acctAdmin">Account Administration</th>
+                    <tr  >
+                        <th >Account Administration</th>
                     </tr>
                     <tr class="AccountAdmin" value="false">
                         @foreach (var Sheet in Model.SheetCheckboxes)
@@ -384,89 +384,15 @@
         })
     }
     window.onload = myFunct();
-    function AccountFunct(x) {
-        alert("Before");
-        alert(x);
-        alert("after");
-        if ($("#AccountAdmin").val() == "False" || $("#AccountAdmin").val() == "false") {
-            $("#AccountAdmin").val(true);
+    function AccountFunct(SelectedCheckbox) {
+        alert(SelectedCheckbox.value.toLowerCase());
+        if (SelectedCheckbox.value.toLowerCase() == "false") {
+            SelectedCheckbox.value = true;
+            alert("set to True");
         }
-        else if ($("#AccountAdmin").val() == "true") {
-            $("#AccountAdmin").val(false)
-        }
-    }
-    function ShareFunct() {
-
-        if ($("#ShareDrive").val() == "False" || $("#ShareDrive").val() == "false") {
-            $("#ShareDrive").val(true);
-        }
-        else if ($("#ShareDrive").val() == "true") {
-            $("#ShareDrive").val(false)
-        }
-
-    }
-    function PhoneFunct() {
-
-        if ($("#PhoneSupport").val() == "False" || $("#PhoneSupport").val() == "false") {
-            $("#PhoneSupport").val(true);
-        }
-        else if ($("#PhoneSupport").val() == "true") {
-            $("#PhoneSupport").val(false)
-        }
-
-    }
-
-    function PrinterFunct() {
-        if ($("#PrinterAdmin").val() == "False" || $("#PrinterAdmin").val() == "false") {
-            $("#PrinterAdmin").val(true);
-        }
-        else if ($("#PrinterAdmin").val() == "true") {
-            $("#PrinterAdmin").val(false)
-        }
-    }
-
-    function SoftwareFunct() {
-        if ($("#SoftwareProv").val() == "False" || $("#SoftwareProv").val() == "false") {
-            $("#SoftwareProv").val(true);
-        }
-        else if ($("#SoftwareProv").val() == "true") {
-            $("#SoftwareProv").val(false)
-        }
-    }
-
-    function MicrosoftFunct() {
-        if ($("#MicrosoftOffice").val() == "False" || $("#MicrosoftOffice").val() == "false") {
-            $("#MicrosoftOffice").val(true);
-        }
-        else if ($("#MicrosoftOffice").val() == "true") {
-            $("#MicrosoftOffice").val(false)
-        }
-    }
-
-    function PCSupportFunct() {
-        if ($("#PCSupport").val() == "False" || $("#PCSupport").val() == "false") {
-            $("#PCSupport").val(true);
-        }
-        else if ($("#PCSupport").val() == "true") {
-            $("#PCSupport").val(false)
-
-        }
-    }
-
-    function OfficeFunct() {
-        if ($("#Office365").val() == "False" || $("#Office365").val() == "false") {
-            $("#Office365").val(true);
-        }
-        else if ($("#Office365").val() == "true") {
-            $("#Office365").val(false)
-        }
-    }
-    function MonitoringFunct() {
-        if ($("#Monitoring").val() == "False" || $("#Monitoring").val() == "false") {
-            $("#Monitoring").val(true);
-        }
-        else if ($("#Monitoring").val() == "true") {
-            $("#Monitoring").val(false)
+        else if (SelectedCheckbox.value.toLowerCase() == "true") {
+            SelectedCheckbox.value = false;
+            alert("set to False");
         }
     }
 </script>

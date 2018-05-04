@@ -14,8 +14,10 @@ namespace nStack.Models
         public Dictionary<string, List<string>> TabData;
         public List<string> SheetList;
         public List<SortedData[]> SortedData;
-        
+
         //Section Checkbox select
+        public Dictionary<string, List<string>> SheetUsedBy = new Dictionary<string, List<string>>();
+            //will be removing
         public List<string> AcctAdminUsedBy = new List<string>();
         public List<string> PCSupportUsedBy = new List<string>();
         public List<string> MicrosoftUsedBy = new List<string>();

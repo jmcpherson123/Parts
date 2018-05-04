@@ -43,6 +43,13 @@ namespace nStack.Helpers
             {
                 vm.SortedData = analyze.SortBySection(vm.MasterFile);
                 var sheetName = analyze.SheetNames;
+                foreach(var Company in vm.SortedData)
+                {
+                    
+                     
+                    
+                }
+               
                 vm.AcctAdminUsedBy = analyze.CompanySectionsUsed.AcctAdmin;
                 vm.PCSupportUsedBy = analyze.CompanySectionsUsed.PCSupport;
                 vm.MicrosoftUsedBy = analyze.CompanySectionsUsed.MicrOffSup;
@@ -52,16 +59,6 @@ namespace nStack.Helpers
                 vm.SoftwareProvisionUsedBy = analyze.CompanySectionsUsed.SoftwareProvision;
                 vm.MonitoringUsedBy = analyze.CompanySectionsUsed.Monitoring;
 
-                /* vm.AdminCheckBoxes = analyze.CompanyCheck;
-                 vm.ShareDriveCheckBoxes = getCheckBoxes(analyze.CompanySectionsUsed, "ShareDrive");
-                 vm.PhoneSupportCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "PhoneSupport");
-                 vm.SoftwareProvisionCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "SoftwareProvision");
-                 vm.PrinterAdminCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "PrinterAdmin");
-                 vm.PCSupportCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "PCSupport");
-                 vm.Office365Checkboxes = getCheckBoxes(analyze.CompanySectionsUsed, "365");
-                 vm.MicrosoftCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "Microsoft");
-                 vm.MonitoringCheckboxes = getCheckBoxes(analyze.CompanySectionsUsed, "Monit");
-                 */
                 vm.SheetCheckboxes = setUpCheckboxes(analyze.SheetNames, analyze);
                 vm.SelectedCompany = getSelectedCompany(vm);
             }
