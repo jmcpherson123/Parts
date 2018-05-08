@@ -16,9 +16,9 @@ namespace SampleWeb.Helpers
 
         }
 
-        public List<int> SortInt()
+        public int[] SortInt()
         {
-            List<int> SortedList = new List<int>();
+            int[] SortedList;
             for(int i=0; i< listOfInts.Length-2; i++)
             {
                 for(int j=0; j < listOfInts.Length - 2; j++)
@@ -32,6 +32,7 @@ namespace SampleWeb.Helpers
                 }
 
             }
+            SortedList = listOfInts;
             return SortedList;
         }
     }

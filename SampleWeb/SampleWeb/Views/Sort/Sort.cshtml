@@ -7,9 +7,9 @@
 {
     <div class="labelBox">
         <h3 class="instruction"> Select what type of sort you would like to do</h3>
-        <button class="btn btn-primary"> Sort String</button>
-        <button class="btn btn-primary"> Sort Integer</button>
-        <button class="btn btn-primary"> Sort File</button>
+        <button class="btn btn-primary" onclick="SelectSortString()"> Sort String</button>
+        <button type="button" class="btn btn-primary" onclick="SelectSortInt()"> Sort Integer</button>
+        <button class="btn btn-primary" > Sort File</button>
     </div>
 
     <div class="sortStringContainer">
@@ -62,4 +62,11 @@
             }
         })
     })
+    function SelectSortString() {
+        alert("show int was clicked");
+        $(".sortStringContainer").show();
+    }
+    function SelectSortInt() {
+        alert("show int was clicked");
+    }
 </script>

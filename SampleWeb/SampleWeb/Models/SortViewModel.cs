@@ -9,8 +9,10 @@ namespace SampleWeb.Models
     public class SortViewModel
     {
         public string originalString;
+        public int[] testInt;
         public string sortedString;
         public string exampleString;
+        public int[] sortedInt;
         public string getSentence { get; set; }
 
         public void runTestString()
@@ -26,11 +28,18 @@ namespace SampleWeb.Models
             return temporaryString;
         }
 
-        public List<int> SortInteger(int[] IntList)
+        public void runTestInt()
         {
-            List<int> sortedInts = new List<int>();
+            testInt = new int[]{ 9, 4, 14, 3, 5, 1};
+            sortedInt = SortInteger(testInt);
+        }
 
-            return sortedInts;
+        public int[] SortInteger(int[] IntList)
+        {
+            int[] sortedInt;
+            IntSorter intSorter = new IntSorter(IntList);
+            sortedInt = intSorter.SortInt();
+            return sortedInt;
 
         }
     }

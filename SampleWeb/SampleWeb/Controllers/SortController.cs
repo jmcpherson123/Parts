@@ -19,10 +19,16 @@ namespace SampleWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult Sort(SortViewModel vm)
+        public ActionResult SortString(SortViewModel vm)
         {
             vm.sortedString=vm.SortString(vm.getSentence);
-            return View(vm);
+            return View("Sort", vm);
+        }
+
+        public ActionResult SortInteger(SortViewModel vm)
+        {
+            vm.runTestInt();
+            return View("Sort",vm);
         }
     }
 }
