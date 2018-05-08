@@ -16,8 +16,10 @@ namespace nStack.Helpers
             int NumberOfMasterFiles = rawFile.Count();
             foreach (BinFileObject binFile in rawFile)
             {
-                List<string> TitleKeys = binFile.container.Keys.ToList();
+                Dictionary<string, List<string>> lll = new Dictionary<string, List<string>>();
+                
                 CheckboxHelper checkbox = new CheckboxHelper();
+
                 SheetNames = binFile.container.Keys.ToList();
                 SortedData[] SortedData = new SortedData[binFile.container.Keys.Count];
                 int iterator = 0;
@@ -73,7 +75,7 @@ namespace nStack.Helpers
                     {
                         if (!AcctAdminCompanies.Contains(Set[SortIterator].CompanyName))
                         {
-                            AcctAdminCompanies.Add(Set[SortIterator].CompanyName);
+                            //AcctAdminCompanies.Add(Set[SortIterator].CompanyName);
                         }
                     }
 
