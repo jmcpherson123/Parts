@@ -3,9 +3,9 @@ C:\Users\Jasmin.Mcpherson\source\repos\SortingAlgorithms\SortingAlgorithms\bin\D
 C:\Users\Jasmin.Mcpherson\source\repos\SortingAlgorithms\SortingAlgorithms\bin\Debug\netcoreapp2.0\SortingAlgorithms.runtimeconfig.dev.json
 C:\Users\Jasmin.Mcpherson\source\repos\SortingAlgorithms\SortingAlgorithms\bin\Debug\netcoreapp2.0\SortingAlgorithms.dll
 C:\Users\Jasmin.Mcpherson\source\repos\SortingAlgorithms\SortingAlgorithms\bin\Debug\netcoreapp2.0\SortingAlgorithms.pdb
-C:\Users\Jasmin.Mcpherson\source\repos\SortingAlgorithms\SortingAlgorithms\obj\Debug\netcoreapp2.0\SortingAlgorithms.csprojResolveAssemblyReference.cache
 C:\Users\Jasmin.Mcpherson\source\repos\SortingAlgorithms\SortingAlgorithms\obj\Debug\netcoreapp2.0\SortingAlgorithms.csproj.CoreCompileInputs.cache
 C:\Users\Jasmin.Mcpherson\source\repos\SortingAlgorithms\SortingAlgorithms\obj\Debug\netcoreapp2.0\SortingAlgorithms.AssemblyInfoInputs.cache
 C:\Users\Jasmin.Mcpherson\source\repos\SortingAlgorithms\SortingAlgorithms\obj\Debug\netcoreapp2.0\SortingAlgorithms.AssemblyInfo.cs
 C:\Users\Jasmin.Mcpherson\source\repos\SortingAlgorithms\SortingAlgorithms\obj\Debug\netcoreapp2.0\SortingAlgorithms.dll
 C:\Users\Jasmin.Mcpherson\source\repos\SortingAlgorithms\SortingAlgorithms\obj\Debug\netcoreapp2.0\SortingAlgorithms.pdb
+C:\Users\Jasmin.Mcpherson\source\repos\SortingAlgorithms\SortingAlgorithms\obj\Debug\netcoreapp2.0\SortingAlgorithms.csprojAssemblyReference.cache

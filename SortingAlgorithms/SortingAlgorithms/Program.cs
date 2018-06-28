@@ -9,10 +9,11 @@ namespace SortingAlgorithms
             //Insertion Sort
             Console.WriteLine("Hello World!");
             string sentence = " This is a tester, please work";
-
-            var sorted =doBubbleSort(sentence);
+            int[] numbers = { 3, 6, 4, 8, 1, 7, 3, 9 };
+            //var sorted =doBubbleSort(sentence);
             Console.WriteLine(sentence);
-            Console.WriteLine(sorted);
+            //Console.WriteLine(sorted);
+            doInsertSort(numbers);
             Console.ReadLine();
 
         }
@@ -44,6 +45,27 @@ namespace SortingAlgorithms
             }
 
                 return sortedLine;
+        }
+
+        public static void doInsertSort(int[] ListOfNumbers)
+        {
+            int size = ListOfNumbers.Length;
+            for(int i=0; i<size; i++)
+            {
+                int temp = ListOfNumbers[i];
+                int prev = i - 1;
+                while(prev>=0&& ListOfNumbers[prev] > temp)
+                {
+                    ListOfNumbers[prev + 1] = ListOfNumbers[prev];
+                    prev = prev - 1;
+                }
+                ListOfNumbers[prev + 1] = temp;
+            }
+
+            foreach(int num in ListOfNumbers)
+            {
+                Console.WriteLine(num);
+            }
         }
     }
 }
