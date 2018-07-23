@@ -1,0 +1,11 @@
+C:\Users\jspice\documents\visual studio 2017\Projects\PDQEntry\PDQEntry\obj\Debug\netcoreapp2.0\PDQEntry.csprojResolveAssemblyReference.cache
+C:\Users\jspice\documents\visual studio 2017\Projects\PDQEntry\PDQEntry\obj\Debug\netcoreapp2.0\PDQEntry.csproj.CoreCompileInputs.cache
+C:\Users\jspice\documents\visual studio 2017\Projects\PDQEntry\PDQEntry\obj\Debug\netcoreapp2.0\PDQEntry.AssemblyInfoInputs.cache
+C:\Users\jspice\documents\visual studio 2017\Projects\PDQEntry\PDQEntry\obj\Debug\netcoreapp2.0\PDQEntry.AssemblyInfo.cs
+C:\Users\jspice\documents\visual studio 2017\Projects\PDQEntry\PDQEntry\bin\Debug\netcoreapp2.0\PDQEntry.deps.json
+C:\Users\jspice\documents\visual studio 2017\Projects\PDQEntry\PDQEntry\bin\Debug\netcoreapp2.0\PDQEntry.runtimeconfig.json
+C:\Users\jspice\documents\visual studio 2017\Projects\PDQEntry\PDQEntry\bin\Debug\netcoreapp2.0\PDQEntry.runtimeconfig.dev.json
+C:\Users\jspice\documents\visual studio 2017\Projects\PDQEntry\PDQEntry\bin\Debug\netcoreapp2.0\PDQEntry.dll
+C:\Users\jspice\documents\visual studio 2017\Projects\PDQEntry\PDQEntry\bin\Debug\netcoreapp2.0\PDQEntry.pdb
+C:\Users\jspice\documents\visual studio 2017\Projects\PDQEntry\PDQEntry\obj\Debug\netcoreapp2.0\PDQEntry.dll
+C:\Users\jspice\documents\visual studio 2017\Projects\PDQEntry\PDQEntry\obj\Debug\netcoreapp2.0\PDQEntry.pdb
